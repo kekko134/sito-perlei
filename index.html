@@ -8,74 +8,135 @@
 body{
   margin:0;
   font-family: Arial;
-  background: linear-gradient(135deg,#020b1a,#0a2fff);
+  background:#020b1a;
   color:white;
-  overflow-x:hidden;
-}
-
-/* CUORI */
-.heart{
-  position:fixed;
-  top:-10px;
-  color:#7fd3ff;
-  font-size:18px;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  to{transform:translateY(100vh);}
-}
-
-/* HOME BUTTON */
-#homeBtn{
-  position:fixed;
-  top:10px;
-  left:10px;
-  font-size:24px;
-  cursor:pointer;
-  display:none;
-  color:#7fd3ff;
+  overflow:hidden;
 }
 
 /* LOGIN */
 #login{
+  width:100vw;
   height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  background:linear-gradient(135deg,#020b1a,#0a2fff);
   text-align:center;
 }
 
-/* TITOLONE */
 #title{
-  font-size:38px;
-  font-weight:bold;
-  margin-bottom:20px;
+  font-size:40px;
   color:#7fd3ff;
-  text-shadow:0 0 15px #2b6cff;
+  margin-bottom:20px;
+  text-shadow:0 0 20px #2b6cff;
+}
+
+/* NAV */
+#nav{
+  position:fixed;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:10;
+  display:none;
+}
+
+button{
+  margin:5px;
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  background:rgba(43,108,255,0.6);
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+  backdrop-filter: blur(8px);
+}
+
+button:hover{
+  transform:translateY(-2px);
+  background:rgba(43,108,255,0.9);
 }
 
 /* SEZIONI */
 .section{
-  display:none;
-  padding:20px;
-  text-align:center;
+  position:absolute;
+  width:100vw;
+  height:100vh;
+  top:0;
+  left:0;
+  opacity:0;
+  transform:scale(1.05);
+  transition:all 0.6s ease;
+  pointer-events:none;
 }
-.active{display:block;}
 
-/* FOTO */
-.photos img{
-  width:160px;
-  height:160px;
-  object-fit:cover;
-  margin:10px;
-  border-radius:15px;
-  cursor:pointer;
-  transition:0.3s;
-  border:2px solid #2b6cff;
+.section.active{
+  opacity:1;
+  transform:scale(1);
+  pointer-events:all;
 }
-.photos img:hover{
-  transform:scale(1.1);
+
+/* HOME GRID */
+#home{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  grid-template-rows:repeat(2,1fr);
+}
+
+#home img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  cursor:pointer;
+  filter:brightness(0.85);
+  transition:0.6s;
+  animation:cinemaIn 0.8s ease both;
+}
+
+#home img:hover{
+  transform:scale(1.08);
+  filter:brightness(1.1);
+}
+
+/* VIDEO */
+#video video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* DEDICHE */
+#dediche{
+  background:#020b1a;
+}
+
+.dedica{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(1.05);
+  font-size:30px;
+  text-align:center;
+  width:70%;
+  opacity:0;
+  transition:all 0.8s ease;
+  color:#d9ecff;
+}
+
+.dedica.active{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+/* SEGRETO */
+#secret{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
 }
 
 /* MODALE FOTO */
@@ -83,49 +144,49 @@ body{
   position:fixed;
   top:0;left:0;
   width:100%;height:100%;
-  background:rgba(0,0,0,0.85);
+  background:rgba(0,0,0,0.9);
   display:none;
   justify-content:center;
   align-items:center;
 }
+
 #modal img{
   max-width:90%;
   max-height:90%;
-  border-radius:10px;
-  border:2px solid #2b6cff;
 }
 
-/* BOTTONI */
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:10px;
-  margin:5px;
-  cursor:pointer;
-  background:#2b6cff;
-  color:white;
-}
-
-/* DEDICHE */
-#dedicaBox{
-  font-size:20px;
-  margin:30px;
-  line-height:1.6;
-  color:#d9ecff;
+/* CINEMA EFFECT */
+@keyframes cinemaIn {
+  from {
+    opacity:0;
+    transform:scale(1.1);
+    filter:blur(8px);
+  }
+  to {
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="homeBtn" onclick="goHome()">🏠</div>
-
 <!-- LOGIN -->
 <div id="login">
   <div id="title">Ciao amore, questo è per te</div>
-  <h2>Inserisci la password</h2>
+  <h3>Inserisci la password</h3>
   <input type="password" id="pw">
-  <button onclick="checkLogin()">Entra</button>
+  <button onclick="login()">Entra</button>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <button onclick="show('home')">Home</button>
+  <button onclick="show('video')">Video</button>
+  <button onclick="show('dediche')">Dediche</button>
+  <button onclick="show('secret')">Segreto</button>
 </div>
 
 <!-- APP -->
@@ -133,68 +194,66 @@ button{
 
 <!-- HOME -->
 <div id="home" class="section active">
-  <h1 style="color:#7fd3ff;">Per Te 🤍</h1>
-
-  <div class="photos">
-    <img src="foto1.jpg" onclick="openImg(this)">
-    <img src="foto2.jpg" onclick="openImg(this)">
-    <img src="foto3.jpg" onclick="openImg(this)">
-  </div>
-
-  <button onclick="show('video')">Video</button>
-  <button onclick="show('dediche')">Dediche</button>
-  <button onclick="show('secret')">Segreto</button>
+  <img src="foto1.jpg" onclick="openImg(this)">
+  <img src="foto2.jpg" onclick="openImg(this)">
+  <img src="foto3.jpg" onclick="openImg(this)">
+  <img src="foto4.jpg" onclick="openImg(this)">
 </div>
 
 <!-- VIDEO -->
 <div id="video" class="section">
-  <video autoplay muted loop style="width:100%;height:80vh;object-fit:cover;">
+  <video autoplay muted loop>
     <source src="video.mp4">
   </video>
 </div>
 
 <!-- DEDICHE -->
 <div id="dediche" class="section">
-  <div id="dedicaBox"></div>
-  <button onclick="nextDedica()">Successiva</button>
+
+  <div class="dedica active">A volte basta un tuo sguardo per cambiare tutto.</div>
+  <div class="dedica">Mi perdo nei dettagli che ti rendono unica.</div>
+  <div class="dedica">Ogni pensiero bello porta inevitabilmente a te.</div>
+  <div class="dedica">Resta: è l’unica cosa che vorrei chiederti.</div>
+  <div class="dedica">E sei il mio eviterno.</div>
+  <div class="dedica">Sei l’unica cosa che mi rende irrazionale.</div>
+  <div class="dedica">Ad maiora, tecum.</div>
+  <div class="dedica">Rimani nei miei silenzi più di mille parole.</div>
+
 </div>
 
 <!-- SEGRETO -->
 <div id="secret" class="section">
-  <p style="opacity:0.8;">“Se sai, sai.”</p>
   <input type="password" id="secretpw">
-  <button onclick="checkSecret()">Entra</button>
+  <button onclick="secret()">Entra</button>
 </div>
 
 </div>
 
 <!-- MODALE -->
-<div id="modal" onclick="closeImg()">
+<div id="modal" onclick="this.style.display='none'">
   <img id="modalImg">
 </div>
 
 <script>
 
 // LOGIN
-function checkLogin(){
-  let pw=document.getElementById("pw").value;
-  if(pw==="estasi contemplativa"){
+function login(){
+  if(document.getElementById("pw").value==="estasi contemplativa"){
     document.getElementById("login").style.display="none";
     document.getElementById("app").style.display="block";
-    document.getElementById("homeBtn").style.display="block";
-  } else {
-    alert("Password errata");
+    document.getElementById("nav").style.display="block";
+    show("home");
   }
 }
 
 // NAV
 function show(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+  document.querySelectorAll(".section").forEach(el=>{
+    el.classList.remove("active");
+  });
 
-function goHome(){
-  show('home');
+  const target=document.getElementById(id);
+  target.classList.add("active");
 }
 
 // FOTO
@@ -202,66 +261,30 @@ function openImg(img){
   document.getElementById("modal").style.display="flex";
   document.getElementById("modalImg").src=img.src;
 }
-function closeImg(){
-  document.getElementById("modal").style.display="none";
-}
 
-// DEDICHE
-let dediche=[
-"A volte basta un tuo sguardo per cambiare tutto.",
-"Mi perdo nei dettagli che ti rendono unica.",
-"Ogni pensiero bello, in qualche modo, porta a te.",
-"Resta: è l’unica cosa che vorrei chiederti.",
-"E anche quando non ci sei, ti sento vicina.",
-"Ad maiora, tecum.",
-"E sei il mio eviterno.",
-"Tra tutto ciò che potrei essere, con te dimentico di fingere.",
-"E sei l’unica cosa che mi rende irrazionale.",
-"Rimani nei miei silenzi più di mille parole.",
-"Non so quando è iniziato, ma so che non passa.",
-"Ora ha tutto un altro senso."
-];
-
+// DEDICHE ROTAZIONE
 let i=0;
-function nextDedica(){
-  document.getElementById("dedicaBox").innerText=dediche[i];
+const dediche=document.querySelectorAll(".dedica");
+
+setInterval(()=>{
+  dediche.forEach(d=>d.classList.remove("active"));
+  dediche[i].classList.add("active");
   i=(i+1)%dediche.length;
-}
-nextDedica();
+},3000);
 
 // SEGRETO
-function checkSecret(){
-  let pw=document.getElementById("secretpw").value;
-
-  if(pw==="amoreaeterno"){
+function secret(){
+  if(document.getElementById("secretpw").value==="amoreaeterno"){
     document.getElementById("secret").innerHTML=`
-      <div style="padding:20px; font-size:18px; line-height:1.7; text-align:left; color:#d9ecff;">
-        Quando ti guardo, mi accorgo che qualcosa dentro di me smette di seguire le sue regole abituali.<br><br>
-
-        Io che ho sempre cercato ordine e logica, con te perdo quella precisione che mi ha sempre guidato.<br><br>
-
-        Non è confusione, è un altro tipo di chiarezza che non so ancora spiegare fino in fondo.<br><br>
-
-        Credo che il destino ci faccia incontrare nei momenti meno opportuni, quasi a sfidarci, ma penso che finché starò con te sceglierò sempre il nostro disordine rispetto a un mondo di finta pace.<br><br>
-
-        E forse è proprio in questa irrazionalità che, per la prima volta, mi sento davvero nel posto giusto.
+      <div style="color:#d9ecff;font-size:22px;line-height:1.7;padding:30px;">
+        Quando ti guardo, tutto perde il bisogno di essere spiegato.<br><br>
+        Io che cercavo ordine, con te ho imparato il valore del disordine.<br><br>
+        Il destino ci mette nei momenti sbagliati, ma io sceglierei comunque noi.<br><br>
+        Perché tra una finta pace e il nostro caos, scelgo te.
       </div>
     `;
-  } else {
-    alert("Non ancora...");
   }
 }
-
-// CUORI
-setInterval(()=>{
-  let h=document.createElement("div");
-  h.classList.add("heart");
-  h.innerHTML="🤍";
-  h.style.left=Math.random()*window.innerWidth+"px";
-  h.style.animationDuration=(3+Math.random()*4)+"s";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),5000);
-},300);
 
 </script>
 
