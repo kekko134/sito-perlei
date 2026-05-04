@@ -2,115 +2,111 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Per Lei 💙</title>
+<title>Per Te</title>
 
 <style>
-body {
-  margin: 0;
+body{
+  margin:0;
   font-family: Arial;
-  background: linear-gradient(135deg, #a0d8ff, #d6f0ff);
-  overflow-x: hidden;
-  color: white;
-}
-
-/* LOGIN */
-#login {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-}
-
-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: #0077ff;
-  color: white;
-  cursor: pointer;
-}
-
-/* NAV */
-nav {
-  background: rgba(0,0,0,0.2);
-  padding: 10px;
-  text-align: center;
-}
-
-nav button {
-  margin: 5px;
-}
-
-/* SEZIONI */
-.section {
-  display: none;
-  padding: 20px;
-  text-align: center;
-}
-
-.active {
-  display: block;
-}
-
-/* FOTO */
-.photos img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  margin: 10px;
-  border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-}
-
-/* VIDEO */
-#videoSection {
-  position: relative;
-  height: 100vh;
-}
-
-#videoSection video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background: linear-gradient(135deg,#071521,#123a5a);
+  color:white;
+  overflow-x:hidden;
 }
 
 /* CUORI */
-.heart {
-  position: fixed;
-  top: -10px;
-  color: white;
-  font-size: 20px;
-  animation: fall linear infinite;
+.heart{
+  position:fixed;
+  top:-10px;
+  color:white;
+  font-size:18px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(100vh);}
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(100vh);
-  }
+/* HOME BUTTON */
+#homeBtn{
+  position:fixed;
+  top:10px;
+  left:10px;
+  font-size:24px;
+  cursor:pointer;
+  display:none;
 }
 
-/* SECRET */
-#secret input {
-  margin-top: 10px;
+/* LOGIN */
+#login{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+/* SEZIONI */
+.section{
+  display:none;
+  padding:20px;
+  text-align:center;
+}
+.active{display:block;}
+
+/* FOTO */
+.photos img{
+  width:160px;
+  height:160px;
+  object-fit:cover;
+  margin:10px;
+  border-radius:15px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.photos img:hover{
+  transform:scale(1.1);
+}
+
+/* MODALE FOTO */
+#modal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+#modal img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
+}
+
+/* BOTTONI */
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  margin:5px;
+  cursor:pointer;
+}
+
+/* DEDICHE */
+#dedicaBox{
+  font-size:20px;
+  margin:30px;
+  line-height:1.6;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN INIZIALE -->
+<div id="homeBtn" onclick="goHome()">🏠</div>
+
+<!-- LOGIN -->
 <div id="login">
-  <h2>Inserisci password 💙</h2>
+  <h2>Inserisci la password</h2>
   <input type="password" id="pw">
   <button onclick="checkLogin()">Entra</button>
 </div>
@@ -118,108 +114,140 @@ nav button {
 <!-- APP -->
 <div id="app" style="display:none">
 
-<nav>
-  <button onclick="show('home')">Home</button>
+<!-- HOME -->
+<div id="home" class="section active">
+  <h1>Per Te 🤍</h1>
+
+  <div class="photos">
+    <img src="foto1.jpg" onclick="openImg(this)">
+    <img src="foto2.jpg" onclick="openImg(this)">
+    <img src="foto3.jpg" onclick="openImg(this)">
+  </div>
+
   <button onclick="show('video')">Video</button>
   <button onclick="show('dediche')">Dediche</button>
   <button onclick="show('secret')">Segreto</button>
-</nav>
-
-<!-- HOME -->
-<div id="home" class="section active">
-  <h1>Per Te 💙</h1>
-
-  <div class="photos">
-    <img src="foto1.jpg">
-    <img src="foto2.jpg">
-    <img src="foto3.jpg">
-  </div>
-
-  <p>Il nostro piccolo mondo</p>
 </div>
 
 <!-- VIDEO -->
 <div id="video" class="section">
-  <div id="videoSection">
-    <video autoplay muted loop>
-      <source src="video.mp4" type="video/mp4">
-    </video>
-  </div>
+  <video autoplay muted loop style="width:100%;height:80vh;object-fit:cover;">
+    <source src="video.mp4">
+  </video>
 </div>
 
 <!-- DEDICHE -->
 <div id="dediche" class="section">
-  <h2>Dediche 💌</h2>
-  <p>A volte basta un tuo sguardo per cambiare tutto.</p>
-  <p>Mi perdo nei dettagli che ti rendono unica.</p>
-  <p>Ogni pensiero bello, in qualche modo, porta a te.</p>
-  <p>Resta: è l’unica cosa che vorrei chiederti.</p>
-  <p>E anche quando non ci sei, ti sento vicina.</p>
-  <p>Ad maiora, tecum.</p>
-  <p>E sei il mio eviterno, anche quando fingo di contare il tempo.</p>
-  <p>Tra tutto ciò che potrei essere, con te dimentico di fingere.</p>
-  <p>E sei l’unica cosa che mi rende irrazionale.</p>
-  <p>Rimani nei miei silenzi più di mille parole.</p>
-  <p>Non so spiegarti quando è iniziato, ma so che non passa.</p>
-  <p>Ora ha tutto un altro senso, da quando ci sei tu.</p>
+  <div id="dedicaBox"></div>
+  <button onclick="nextDedica()">Successiva</button>
 </div>
 
 <!-- SEGRETO -->
 <div id="secret" class="section">
-  <h2>Sezione Segreta 🔒</h2>
-  <p>“Se ti chiedi cosa devi inserire, riguarda ciò che hai visto prima”</p>
+  <p style="opacity:0.8;">
+    “Se ti chiedi cosa devi inserire, riguarda ciò che hai visto prima”
+  </p>
   <input type="password" id="secretpw">
   <button onclick="checkSecret()">Entra</button>
 </div>
 
 </div>
 
+<!-- MODALE FOTO -->
+<div id="modal" onclick="closeImg()">
+  <img id="modalImg">
+</div>
+
 <script>
 
-// LOGIN PRINCIPALE
-function checkLogin() {
-  let pw = document.getElementById("pw").value;
-  if (pw === "estasi contemplativa") {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("app").style.display = "block";
+// LOGIN
+function checkLogin(){
+  let pw=document.getElementById("pw").value;
+  if(pw==="estasi contemplativa"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("app").style.display="block";
+    document.getElementById("homeBtn").style.display="block";
   } else {
-    alert("Password errata 💙");
+    alert("Password errata");
   }
 }
 
-// NAVIGAZIONE
-function show(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+// NAV
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-// SEGRETO
-function checkSecret() {
-  let pw = document.getElementById("secretpw").value;
-  if (pw === "AMORE AETERNO") {
-    alert("Hai scoperto il segreto 💙");
+// HOME BUTTON
+function goHome(){
+  show('home');
+}
+
+// FOTO ZOOM
+function openImg(img){
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("modalImg").src=img.src;
+}
+function closeImg(){
+  document.getElementById("modal").style.display="none";
+}
+
+// DEDICHE
+let dediche=[
+"A volte basta un tuo sguardo per cambiare tutto.",
+"Mi perdo nei dettagli che ti rendono unica.",
+"Ogni pensiero bello, in qualche modo, porta a te.",
+"Resta: è l’unica cosa che vorrei chiederti.",
+"E anche quando non ci sei, ti sento vicina.",
+"Ad maiora, tecum.",
+"E sei il mio eviterno.",
+"Tra tutto ciò che potrei essere, con te dimentico di fingere.",
+"E sei l’unica cosa che mi rende irrazionale.",
+"Rimani nei miei silenzi più di mille parole.",
+"Non so quando è iniziato, ma so che non passa.",
+"Ora ha tutto un altro senso."
+];
+
+let i=0;
+function nextDedica(){
+  document.getElementById("dedicaBox").innerText=dediche[i];
+  i=(i+1)%dediche.length;
+}
+nextDedica();
+
+// SEGRETO FINALE
+function checkSecret(){
+  let pw=document.getElementById("secretpw").value;
+
+  if(pw==="AMORE AETERNO"){
+    document.getElementById("secret").innerHTML=`
+      <div style="padding:20px; font-size:18px; line-height:1.7; text-align:left;">
+        Quando ti guardo, mi accorgo che qualcosa dentro di me smette di seguire le sue regole abituali.<br><br>
+
+        Io che ho sempre cercato ordine e logica, con te perdo quella precisione che mi ha sempre guidato.<br><br>
+
+        Non è confusione, è un altro tipo di chiarezza che non so ancora spiegare fino in fondo.<br><br>
+
+        Credo che il destino ci faccia incontrare nei momenti meno opportuni, quasi a sfidarci, ma penso che finché starò con te sceglierò sempre il nostro disordine rispetto a un mondo di finta pace.<br><br>
+
+        E forse è proprio in questa irrazionalità che, per la prima volta, mi sento davvero nel posto giusto.
+      </div>
+    `;
   } else {
     alert("Non ancora...");
   }
 }
 
-// CUORI ANIMATI
-function createHearts() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "🤍";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.animationDuration = (3 + Math.random() * 5) + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 5000);
-  }, 300);
-}
-
-createHearts();
+// CUORI
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.classList.add("heart");
+  h.innerHTML="🤍";
+  h.style.left=Math.random()*window.innerWidth+"px";
+  h.style.animationDuration=(3+Math.random()*4)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+},300);
 
 </script>
 
