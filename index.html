@@ -31,7 +31,7 @@ body{
   margin-bottom:20px;
 }
 
-/* HOME ICONA */
+/* HOME ICON */
 #homeBtn{
   position:fixed;
   top:15px;
@@ -42,7 +42,7 @@ body{
   display:none;
 }
 
-/* NAV */
+/* NAV (nomi creativi) */
 #nav{
   position:fixed;
   top:15px;
@@ -63,7 +63,7 @@ button{
   backdrop-filter: blur(10px);
 }
 
-/* SEZIONI */
+/* SEZIONI BASE */
 .section{
   position:absolute;
   width:100vw;
@@ -80,7 +80,7 @@ button{
   pointer-events:all;
 }
 
-/* HOME GRID */
+/* HOME */
 #home{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -101,22 +101,21 @@ button{
 }
 
 /* VIDEO FIX DEFINITIVO */
-#video{
+#cinema{
   display:flex;
   justify-content:center;
   align-items:center;
   background:black;
 }
 
-#video video{
+#cinema video{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
 }
 
-/* DEDICHE */
-#dediche{
+/* DEDICHE CINEMA */
+#emozioni{
   display:flex;
   justify-content:center;
   align-items:center;
@@ -126,7 +125,7 @@ button{
 .dedica{
   position:absolute;
   width:80%;
-  font-size:38px;
+  font-size:40px;
   line-height:1.4;
   opacity:0;
   transform:scale(1.1);
@@ -140,12 +139,19 @@ button{
 }
 
 /* SEGRETO */
-#secret{
+#evocazione{
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
   text-align:center;
+}
+
+#evocazione input{
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  margin-top:10px;
 }
 
 /* MODALE FOTO */
@@ -168,9 +174,6 @@ button{
 
 <body>
 
-<!-- HOME ICON -->
-<div id="homeBtn" onclick="show('home')">🏠</div>
-
 <!-- LOGIN -->
 <div id="login">
   <div id="title">Ciao amore, questo è per te</div>
@@ -179,11 +182,14 @@ button{
   <button onclick="login()">Entra</button>
 </div>
 
-<!-- NAV -->
+<!-- HOME ICON -->
+<div id="homeBtn" onclick="show('home')">🏠</div>
+
+<!-- NAV (nomi più poetici) -->
 <div id="nav">
-  <button onclick="show('video')">Video</button>
-  <button onclick="show('dediche')">Dediche</button>
-  <button onclick="show('secret')">Segreto</button>
+  <button onclick="show('cinema')">Memorie</button>
+  <button onclick="show('emozioni')">Pensieri</button>
+  <button onclick="show('evocazione')">Segreto</button>
 </div>
 
 <!-- APP -->
@@ -198,14 +204,14 @@ button{
 </div>
 
 <!-- VIDEO -->
-<div id="video" class="section">
+<div id="cinema" class="section">
   <video autoplay muted loop>
     <source src="video.mp4">
   </video>
 </div>
 
 <!-- DEDICHE -->
-<div id="dediche" class="section">
+<div id="emozioni" class="section">
 
   <div class="dedica active">A volte basta un tuo sguardo per cambiare tutto.</div>
   <div class="dedica">Mi perdo nei dettagli che ti rendono unica.</div>
@@ -216,14 +222,14 @@ button{
   <div class="dedica">Ad maiora, tecum.</div>
   <div class="dedica">Rimani nei miei silenzi più di mille parole.</div>
 
-  <button onclick="nextDedica()" style="position:absolute;bottom:40px;">Cambia frase</button>
+  <button onclick="nextDedica()" style="position:absolute;bottom:40px;">cambia pensiero</button>
 
 </div>
 
 <!-- SEGRETO -->
-<div id="secret">
-  <input type="password" id="secretpw">
-  <button onclick="secret()">Entra</button>
+<div id="evocazione">
+  <input type="password" id="secretpw" placeholder="inserisci codice">
+  <button onclick="secret()">entra</button>
 </div>
 
 </div>
@@ -266,17 +272,13 @@ function nextDedica(){
 // SEGRETO FINALE
 function secret(){
   if(document.getElementById("secretpw").value==="amoreaeterno"){
-    document.getElementById("secret").innerHTML=`
-      <div style="font-size:22px;line-height:1.7;padding:30px;color:#d9ecff;">
-        Quando ti guardo, mi accorgo che qualcosa dentro di me smette di seguire le sue regole abituali.<br><br>
-
-        Io che ho sempre cercato ordine e logica, con te perdo quella precisione che mi ha sempre guidato.<br><br>
-
-        Non è confusione, è un altro tipo di chiarezza che non so ancora spiegare fino in fondo.<br><br>
-
-        Credo che il destino ci faccia incontrare nei momenti meno opportuni, quasi a sfidarci, ma penso che finché starò con te sceglierò sempre il nostro disordine rispetto a un mondo di finta pace.<br><br>
-
-        E forse è proprio in questa irrazionalità che, per la prima volta, mi sento davvero nel posto giusto.
+    document.getElementById("evocazione").innerHTML=`
+      <div style="font-size:22px;line-height:1.7;color:#d9ecff;padding:30px;">
+        Quando ti guardo, mi accorgo che qualcosa dentro di me smette di seguire le sue regole abituali.
+         Io che ho sempre cercato ordine e logica, con te perdo quella precisione che mi ha sempre guidato.
+         Non è confusione, è un altro tipo di chiarezza che non so ancora spiegare fino in fondo.
+         Credo che il destino ci faccia incontrare nei momenti meno opportuni, quasi a sfidarci, ma penso che finché starò con te sceglierò sempre il nostro disordine rispetto a un mondo di finta pace.<br><br>
+         E forse è proprio in questa irrazionalità che, per la prima volta, mi sento davvero nel posto giusto.
       </div>
     `;
   }
