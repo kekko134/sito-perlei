@@ -8,7 +8,7 @@
 body{
   margin:0;
   font-family: Arial;
-  background: linear-gradient(135deg,#071521,#123a5a);
+  background: linear-gradient(135deg,#020b1a,#0a2fff);
   color:white;
   overflow-x:hidden;
 }
@@ -17,7 +17,7 @@ body{
 .heart{
   position:fixed;
   top:-10px;
-  color:white;
+  color:#7fd3ff;
   font-size:18px;
   animation:fall linear infinite;
 }
@@ -33,6 +33,7 @@ body{
   font-size:24px;
   cursor:pointer;
   display:none;
+  color:#7fd3ff;
 }
 
 /* LOGIN */
@@ -42,6 +43,16 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  text-align:center;
+}
+
+/* TITOLONE */
+#title{
+  font-size:38px;
+  font-weight:bold;
+  margin-bottom:20px;
+  color:#7fd3ff;
+  text-shadow:0 0 15px #2b6cff;
 }
 
 /* SEZIONI */
@@ -61,6 +72,7 @@ body{
   border-radius:15px;
   cursor:pointer;
   transition:0.3s;
+  border:2px solid #2b6cff;
 }
 .photos img:hover{
   transform:scale(1.1);
@@ -71,7 +83,7 @@ body{
   position:fixed;
   top:0;left:0;
   width:100%;height:100%;
-  background:rgba(0,0,0,0.8);
+  background:rgba(0,0,0,0.85);
   display:none;
   justify-content:center;
   align-items:center;
@@ -80,6 +92,7 @@ body{
   max-width:90%;
   max-height:90%;
   border-radius:10px;
+  border:2px solid #2b6cff;
 }
 
 /* BOTTONI */
@@ -89,6 +102,8 @@ button{
   border-radius:10px;
   margin:5px;
   cursor:pointer;
+  background:#2b6cff;
+  color:white;
 }
 
 /* DEDICHE */
@@ -96,6 +111,7 @@ button{
   font-size:20px;
   margin:30px;
   line-height:1.6;
+  color:#d9ecff;
 }
 </style>
 </head>
@@ -106,6 +122,7 @@ button{
 
 <!-- LOGIN -->
 <div id="login">
+  <div id="title">Ciao amore, questo è per te</div>
   <h2>Inserisci la password</h2>
   <input type="password" id="pw">
   <button onclick="checkLogin()">Entra</button>
@@ -116,7 +133,7 @@ button{
 
 <!-- HOME -->
 <div id="home" class="section active">
-  <h1>Per Te 🤍</h1>
+  <h1 style="color:#7fd3ff;">Per Te 🤍</h1>
 
   <div class="photos">
     <img src="foto1.jpg" onclick="openImg(this)">
@@ -144,16 +161,14 @@ button{
 
 <!-- SEGRETO -->
 <div id="secret" class="section">
-  <p style="opacity:0.8;">
-    “Se ti chiedi cosa devi inserire, riguarda ciò che hai visto prima”
-  </p>
+  <p style="opacity:0.8;">“Se sai, sai.”</p>
   <input type="password" id="secretpw">
   <button onclick="checkSecret()">Entra</button>
 </div>
 
 </div>
 
-<!-- MODALE FOTO -->
+<!-- MODALE -->
 <div id="modal" onclick="closeImg()">
   <img id="modalImg">
 </div>
@@ -178,12 +193,11 @@ function show(id){
   document.getElementById(id).classList.add('active');
 }
 
-// HOME BUTTON
 function goHome(){
   show('home');
 }
 
-// FOTO ZOOM
+// FOTO
 function openImg(img){
   document.getElementById("modal").style.display="flex";
   document.getElementById("modalImg").src=img.src;
@@ -215,13 +229,13 @@ function nextDedica(){
 }
 nextDedica();
 
-// SEGRETO FINALE
+// SEGRETO
 function checkSecret(){
   let pw=document.getElementById("secretpw").value;
 
-  if(pw==="AMORE AETERNO"){
+  if(pw==="amoreaeterno"){
     document.getElementById("secret").innerHTML=`
-      <div style="padding:20px; font-size:18px; line-height:1.7; text-align:left;">
+      <div style="padding:20px; font-size:18px; line-height:1.7; text-align:left; color:#d9ecff;">
         Quando ti guardo, mi accorgo che qualcosa dentro di me smette di seguire le sue regole abituali.<br><br>
 
         Io che ho sempre cercato ordine e logica, con te perdo quella precisione che mi ha sempre guidato.<br><br>
