@@ -8,7 +8,7 @@
 body{
   margin:0;
   font-family: Arial;
-  background:#020b1a;
+  background: radial-gradient(circle at top,#0a2fff,#020b1a);
   color:white;
   overflow:hidden;
 }
@@ -21,25 +21,24 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#020b1a,#0a2fff);
   text-align:center;
 }
 
 #title{
-  font-size:40px;
+  font-size:42px;
   color:#7fd3ff;
-  margin-bottom:20px;
   text-shadow:0 0 20px #2b6cff;
+  margin-bottom:20px;
 }
 
 /* NAV */
 #nav{
   position:fixed;
-  top:10px;
+  top:15px;
   left:50%;
   transform:translateX(-50%);
-  z-index:10;
   display:none;
+  z-index:10;
 }
 
 button{
@@ -50,84 +49,75 @@ button{
   background:rgba(43,108,255,0.6);
   color:white;
   cursor:pointer;
-  transition:0.3s;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 }
 
-button:hover{
-  transform:translateY(-2px);
-  background:rgba(43,108,255,0.9);
-}
-
-/* SEZIONI */
+/* SEZIONI UNIFORMI */
 .section{
   position:absolute;
-  width:100vw;
-  height:100vh;
   top:0;
   left:0;
+  width:100vw;
+  height:100vh;
   opacity:0;
-  transform:scale(1.05);
-  transition:all 0.6s ease;
   pointer-events:none;
+  transition:1s ease;
 }
 
 .section.active{
   opacity:1;
-  transform:scale(1);
   pointer-events:all;
 }
 
-/* HOME GRID */
+/* HOME FULL SCREEN CLEAN */
 #home{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  grid-template-rows:repeat(2,1fr);
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
 }
 
 #home img{
   width:100%;
   height:100%;
   object-fit:cover;
-  cursor:pointer;
   filter:brightness(0.85);
   transition:0.6s;
-  animation:cinemaIn 0.8s ease both;
 }
 
 #home img:hover{
-  transform:scale(1.08);
-  filter:brightness(1.1);
+  transform:scale(1.05);
+  filter:brightness(1);
 }
 
-/* VIDEO */
+/* VIDEO FULL */
 #video video{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-/* DEDICHE */
+/* DEDICHE CENTRALI GRANDI */
 #dediche{
-  background:#020b1a;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
 .dedica{
   position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(1.05);
-  font-size:30px;
-  text-align:center;
-  width:70%;
+  width:80%;
+  font-size:40px;
+  line-height:1.4;
   opacity:0;
-  transition:all 0.8s ease;
+  transform:scale(1.1);
+  transition:1s ease;
   color:#d9ecff;
 }
 
 .dedica.active{
   opacity:1;
-  transform:translate(-50%,-50%) scale(1);
+  transform:scale(1);
 }
 
 /* SEGRETO */
@@ -136,10 +126,9 @@ button:hover{
   justify-content:center;
   align-items:center;
   flex-direction:column;
-  text-align:center;
 }
 
-/* MODALE FOTO */
+/* MODALE */
 #modal{
   position:fixed;
   top:0;left:0;
@@ -153,20 +142,6 @@ button:hover{
 #modal img{
   max-width:90%;
   max-height:90%;
-}
-
-/* CINEMA EFFECT */
-@keyframes cinemaIn {
-  from {
-    opacity:0;
-    transform:scale(1.1);
-    filter:blur(8px);
-  }
-  to {
-    opacity:1;
-    transform:scale(1);
-    filter:blur(0);
-  }
 }
 </style>
 </head>
@@ -194,10 +169,10 @@ button:hover{
 
 <!-- HOME -->
 <div id="home" class="section active">
-  <img src="foto1.jpg" onclick="openImg(this)">
-  <img src="foto2.jpg" onclick="openImg(this)">
-  <img src="foto3.jpg" onclick="openImg(this)">
-  <img src="foto4.jpg" onclick="openImg(this)">
+  <img src="foto1.jpg">
+  <img src="foto2.jpg">
+  <img src="foto3.jpg">
+  <img src="foto4.jpg">
 </div>
 
 <!-- VIDEO -->
@@ -212,7 +187,7 @@ button:hover{
 
   <div class="dedica active">A volte basta un tuo sguardo per cambiare tutto.</div>
   <div class="dedica">Mi perdo nei dettagli che ti rendono unica.</div>
-  <div class="dedica">Ogni pensiero bello porta inevitabilmente a te.</div>
+  <div class="dedica">Ogni pensiero, inevitabilmente, porta a te.</div>
   <div class="dedica">Resta: è l’unica cosa che vorrei chiederti.</div>
   <div class="dedica">E sei il mio eviterno.</div>
   <div class="dedica">Sei l’unica cosa che mi rende irrazionale.</div>
@@ -222,7 +197,7 @@ button:hover{
 </div>
 
 <!-- SEGRETO -->
-<div id="secret" class="section">
+<div id="secret">
   <input type="password" id="secretpw">
   <button onclick="secret()">Entra</button>
 </div>
@@ -242,27 +217,16 @@ function login(){
     document.getElementById("login").style.display="none";
     document.getElementById("app").style.display="block";
     document.getElementById("nav").style.display="block";
-    show("home");
   }
 }
 
 // NAV
 function show(id){
-  document.querySelectorAll(".section").forEach(el=>{
-    el.classList.remove("active");
-  });
-
-  const target=document.getElementById(id);
-  target.classList.add("active");
+  document.querySelectorAll(".section").forEach(e=>e.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-// FOTO
-function openImg(img){
-  document.getElementById("modal").style.display="flex";
-  document.getElementById("modalImg").src=img.src;
-}
-
-// DEDICHE ROTAZIONE
+// DEDICHE SLIDE CENTRALI
 let i=0;
 const dediche=document.querySelectorAll(".dedica");
 
@@ -276,9 +240,9 @@ setInterval(()=>{
 function secret(){
   if(document.getElementById("secretpw").value==="amoreaeterno"){
     document.getElementById("secret").innerHTML=`
-      <div style="color:#d9ecff;font-size:22px;line-height:1.7;padding:30px;">
-        Quando ti guardo, tutto perde il bisogno di essere spiegato.<br><br>
-        Io che cercavo ordine, con te ho imparato il valore del disordine.<br><br>
+      <div style="font-size:22px;color:#d9ecff;text-align:center;line-height:1.6;padding:30px;">
+        Quando ti guardo, il mio modo di capire le cose smette di essere quello di sempre.<br><br>
+        Io che cercavo ordine, con te ho scoperto un disordine che ha senso.<br><br>
         Il destino ci mette nei momenti sbagliati, ma io sceglierei comunque noi.<br><br>
         Perché tra una finta pace e il nostro caos, scelgo te.
       </div>
