@@ -8,26 +8,20 @@
 body{
   margin:0;
   font-family: Arial;
-  background: radial-gradient(circle at top,#0a2fff,#020b1a);
-  color:white;
   overflow:hidden;
+  color:white;
+  background: radial-gradient(circle at top,#0a2fff,#020b1a);
 }
 
-/* LOGIN */
-#login{
-  width:100vw;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-#title{
-  font-size:42px;
-  color:#7fd3ff;
-  text-shadow:0 0 20px #2b6cff;
+/* HOME ICON */
+#homeBtn{
+  position:fixed;
+  top:15px;
+  left:15px;
+  font-size:30px;
+  cursor:pointer;
+  z-index:1000;
+  display:none;
 }
 
 /* NAV */
@@ -37,15 +31,15 @@ body{
   left:50%;
   transform:translateX(-50%);
   display:none;
+  z-index:1000;
 }
 
-/* BUTTON */
 button{
   margin:5px;
   padding:10px 15px;
   border:none;
   border-radius:10px;
-  background:rgba(43,108,255,0.6);
+  background:rgba(255,255,255,0.15);
   color:white;
   cursor:pointer;
 }
@@ -60,6 +54,7 @@ button{
   opacity:0;
   pointer-events:none;
   transition:1s ease;
+  background: radial-gradient(circle at top,#0a2fff,#020b1a);
 }
 
 .section.active{
@@ -80,24 +75,32 @@ button{
   object-fit:cover;
 }
 
-/* VIDEO */
+/* VIDEO FULL SCREEN FIX */
+#cinema{
+  background:black;
+}
+
 #cinema video{
-  width:100%;
-  height:100%;
+  width:100vw;
+  height:100vh;
   object-fit:cover;
 }
 
-/* CUORI */
-.heart{
-  position:absolute;
-  top:-20px;
-  color:white;
-  font-size:14px;
-  animation: fall linear forwards;
+/* SEGRETO CENTRATO */
+#evocazione{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
 }
 
-@keyframes fall{
-  to{ transform: translateY(110vh); }
+#evocazione input{
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:10px;
+  text-align:center;
 }
 
 /* AMORE */
@@ -112,14 +115,27 @@ button{
 #frase{
   width:80%;
   font-size:28px;
-  line-height:1.5;
   color:#d9ecff;
 }
 
 #counter{
   position:absolute;
   top:20px;
-  font-size:18px;
+}
+
+/* CUORI GLOBALI */
+.heart{
+  position:absolute;
+  top:-20px;
+  color:white;
+  font-size:14px;
+  animation: fall linear forwards;
+  opacity:0.8;
+  z-index:500;
+}
+
+@keyframes fall{
+  to{ transform: translateY(110vh); }
 }
 </style>
 </head>
@@ -127,16 +143,19 @@ button{
 <body>
 
 <!-- LOGIN -->
-<div id="login">
-  <div id="title">Ciao amore, questo è per te</div>
+<div id="login" style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;">
+  <h1 style="color:#7fd3ff;">Ciao amore</h1>
   <input type="password" id="pw">
   <button onclick="login()">Entra</button>
 </div>
 
+<!-- HOME ICON -->
+<div id="homeBtn" onclick="show('home')">🏠</div>
+
 <!-- NAV -->
 <div id="nav">
   <button onclick="show('home')">Home</button>
-  <button onclick="show('cinema')">Memorie</button>
+  <button onclick="show('cinema')">Video</button>
   <button onclick="show('evocazione')">Segreto</button>
   <button onclick="show('amore')">Quello che amo di te</button>
 </div>
@@ -155,13 +174,13 @@ button{
 <!-- VIDEO -->
 <div id="cinema" class="section">
   <video autoplay muted loop playsinline>
-    <source src="video.mp4" type="video/mp4">
+    <source src="VIDEO1.mp4" type="video/mp4">
   </video>
 </div>
 
 <!-- SEGRETO -->
 <div id="evocazione" class="section">
-  <input type="password" id="secretpw">
+  <input type="password" id="secretpw" placeholder="codice segreto">
   <button onclick="secret()">entra</button>
 </div>
 
@@ -169,7 +188,6 @@ button{
 <div id="amore" class="section">
 
   <div id="hearts"></div>
-
   <div id="counter"></div>
   <div id="frase"></div>
 
@@ -189,6 +207,7 @@ function login(){
     document.getElementById("login").style.display="none";
     document.getElementById("app").style.display="block";
     document.getElementById("nav").style.display="block";
+    document.getElementById("homeBtn").style.display="block";
   }
 }
 
@@ -206,8 +225,8 @@ function show(id){
 function secret(){
   if(document.getElementById("secretpw").value==="amoreaeterno"){
     document.getElementById("evocazione").innerHTML=`
-      <div style="font-size:22px;line-height:1.7;padding:30px;color:#d9ecff;">
-        Ho passato 17 anni a vivere in modo razionale, secondo i miei numeri e la mia rigida matematica.<br><br>
+      <div style="font-size:20px;line-height:1.7;color:#d9ecff;max-width:80%;">
+        Ho passato 17 anni a vivere in modo razionale, secondo i miei numeri e la mia matematica.<br><br>
         Quando ti guardo capisco che tutto cambia.<br>
         Con te non cerco più ordine, cerco verità.<br>
         E in quella verità ci sei sempre tu.
@@ -216,33 +235,30 @@ function secret(){
   }
 }
 
-/* 🔥 100 FRASI COMPLETE */
+/* 💙 100 FRASI REALI */
 const frasi = [
-"I tuoi occhi","Il tuo sorriso","La tua dolcezza","Quando fai la gelosa","Le tue labbra",
-"Il tuo profumo","La tua energia","La tua intelligenza","La tua voce","La tua pazienza",
-"La tua sincerità","I tuoi abbracci","La tua eleganza","Il tuo modo di guardarmi","I tuoi gesti",
-"La tua risatina","Quando riesci a toccarmi l’anima","Quando dormiremo insieme","Il tuo cuore",
-"Quando mi scrivi ti amo sul quaderno","La tua fragilità","Il tuo carattere","La tua forza",
-"La tua dolcezza improvvisa","Il tuo modo di arrabbiarti","Quando fai il muretto","Il tuo sguardo perso",
-"Quando ridi senza motivo","Il modo in cui mi pensi","Quando mi cerchi","Quando mi perdi",
-"Quando mi ritrovi","La tua sincerità disarmante","Quando mi stringi forte","Il tuo profumo sui miei vestiti",
-"Quando mi guardi in silenzio","Il tuo modo di proteggermi","La tua gelosia","La tua libertà",
-"Il tuo modo di amare","Il tuo modo di vivere","Quando metti il rossettino","Quando sorridi appena sveglia",
-"Quando mi scrivi senza motivo","Quando mi pensi la notte","Quando mi chiami","Quando mi ascolti",
-"Quando mi capisci","Quando mi fai ridere","Quando mi fai pensare","Quando mi cambi la giornata",
-"Quando mi manchi","Quando mi vuoi","Quando resti","Quando non vai via","Quando torni",
-"Quando dormiamo insieme","Quando parli dei tuoi sogni","Quando mi racconti tutto","Quando ti apri",
-"Quando ti chiudi e poi torni","Quando mi guardi male per gioco","Quando fai il broncio",
-"Quando ridi piano","Quando ti stringi a me","Quando mi cerchi con gli occhi",
-"Quando mi fai sentire casa","Quando sei fragile","Quando sei forte","Quando sei te stessa",
-"Quando sei mia","Quando sei lontana","Quando sei vicina","Quando sei tutto",
-"Quando mi scegli","Quando mi vuoi bene","Quando mi ami","Quando resti con me",
-"Quando non scappi","Quando mi parli del gelato","Quando mi stringi forte a te",
-"Quando mi guardi e sorridi","Quando sei gelosa","Quando mi fai impazzire","Quando sei perfetta",
-"Quando sei imperfetta","Quando sei unica","Quando sei mia ancora",
-"Quando mi pensi davvero","Quando mi fai battere il cuore","Quando mi guardi come nessuno",
-"Quando mi fai sentire vivo","Quando sei il mio posto sicuro","Quando sei tutto quello che voglio",
-"Quando mi scegli ogni giorno","Quando nonostante tutto resti"
+"I tuoi occhi","Il tuo sorriso","La tua dolcezza","La tua risata","Il tuo profumo",
+"La tua voce","Il tuo modo di guardarmi","I tuoi abbracci","La tua energia","La tua intelligenza",
+"La tua pazienza","La tua sincerità","Il tuo carattere","La tua forza","La tua fragilità",
+"I tuoi capelli","Le tue labbra","Il tuo naso","Il tuo collo","Le tue mani",
+"Quando fai la gelosa","Quando sorridi appena sveglia","Quando mi cerchi","Quando mi perdi",
+"Quando mi ritrovi","Quando mi stringi forte","Quando mi pensi","Quando mi scrivi",
+"Quando mi chiami","Quando ridi senza motivo","Quando sei nervosa","Quando sei dolce all’improvviso",
+"Quando fai il muretto","Quando mi guardi in silenzio","Quando mi ascolti","Quando mi capisci",
+"Quando mi fai ridere","Quando mi fai stare bene","Quando mi fai impazzire","Quando mi manchi",
+"Quando torni","Quando resti","Quando non scappi","Quando sei sincera","Quando sei vera",
+"Quando sei mia","Quando sei tutto","Quando sei niente senza di me","Quando sei casa",
+"Quando sei caos","Quando sei pace","Quando sei luce","Quando sei buio e poi luce",
+"Quando mi abbracci da dietro","Quando mi stringi la mano","Quando mi baci piano","Quando mi guardi forte",
+"Quando mi ascolti davvero","Quando mi fai sentire importante","Quando mi fai sentire scelto",
+"Quando mi fai sentire vivo","Quando mi fai perdere la testa","Quando mi fai sorridere da solo",
+"Quando mi pensi la notte","Quando mi sogni","Quando mi vuoi vicino","Quando mi vuoi lontano ma mi cerchi",
+"Quando mi dici il tuo segreto","Quando mi racconti tutto","Quando ti fidi di me","Quando non ti fidi e poi sì",
+"Quando ti arrabbi per poco","Quando ti passa subito","Quando mi perdoni","Quando mi capisci senza parole",
+"Quando mi guardi come nessuno","Quando mi scegli ogni giorno","Quando resti anche quando è difficile",
+"Quando nonostante tutto sei qui","Quando mi ami davvero","Quando mi fai capire che sei unica",
+"Quando mi fai sentire tuo","Quando mi fai sentire tuo mondo","Quando mi fai sentire casa",
+"Quando mi fai sentire completo","Quando sei semplicemente tu"
 ];
 
 /* SISTEMA */
@@ -255,16 +271,11 @@ function showFrase(){
 
 function nextFrase(){
   index++;
-
   if(index>=frasi.length){
-    document.getElementById("frase").innerHTML=`
-      <div style="font-size:34px;font-weight:bold;">
-        Ti ami adesso?
-      </div>`;
+    document.getElementById("frase").innerHTML="<b>Ti ami adesso?</b>";
     document.getElementById("counter").innerText="";
     return;
   }
-
   showFrase();
 }
 
@@ -273,18 +284,18 @@ function resetAmore(){
   showFrase();
 }
 
-/* CUORI */
+/* CUORI GLOBALI */
 function spawnHeart(){
   const h=document.createElement("div");
   h.classList.add("heart");
   h.innerHTML="🤍";
   h.style.left=Math.random()*100+"vw";
   h.style.animationDuration=(3+Math.random()*4)+"s";
-  document.getElementById("hearts").appendChild(h);
+  document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
 }
 
-setInterval(spawnHeart,300);
+setInterval(spawnHeart,250);
 
 </script>
 
