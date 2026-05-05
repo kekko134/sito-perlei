@@ -54,12 +54,24 @@ button{
   opacity:0;
   pointer-events:none;
   transition:1s ease;
-  background: radial-gradient(circle at top,#0a2fff,#020b1a);
 }
 
 .section.active{
   opacity:1;
   pointer-events:all;
+}
+
+/* HOME */
+#home{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+}
+
+#home img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 /* VIDEO */
@@ -81,7 +93,6 @@ button{
 #dedicaText{
   width:80%;
   font-size:26px;
-  line-height:1.6;
 }
 
 /* SEGRETO */
@@ -93,21 +104,14 @@ button{
   text-align:center;
 }
 
-#evocazione .hint{
-  font-size:14px;
-  opacity:0.8;
-  margin-bottom:10px;
-}
-
 #evocazione input{
   padding:12px;
-  border-radius:10px;
   border:none;
+  border-radius:10px;
   text-align:center;
-  margin-bottom:10px;
 }
 
-/* AMORE */
+/* 100 FRASI */
 #amore{
   display:flex;
   justify-content:center;
@@ -119,7 +123,6 @@ button{
 #frase{
   width:80%;
   font-size:28px;
-  color:#d9ecff;
   opacity:0;
   transform:scale(1.05);
   filter:blur(6px);
@@ -153,12 +156,6 @@ button{
   border-radius:12px;
   background:rgba(255,255,255,0.1);
   border:1px solid white;
-}
-
-.netflix-btn:hover{
-  transform:scale(1.1);
-  background:white;
-  color:black;
 }
 
 /* CUORI */
@@ -199,15 +196,15 @@ button{
 
 <!-- HOME -->
 <div id="home" class="section active">
-  <img src="foto1.jpg" style="width:50%;height:50%">
-  <img src="foto2.jpg" style="width:50%;height:50%">
-  <img src="foto3.jpg" style="width:50%;height:50%">
-  <img src="foto4.jpg" style="width:50%;height:50%">
+  <img src="foto1.jpg">
+  <img src="foto2.jpg">
+  <img src="foto3.jpg">
+  <img src="foto4.jpg">
 </div>
 
 <!-- VIDEO -->
 <div id="cinema" class="section">
-  <video controls autoplay playsinline>
+  <video id="videoCinema" controls playsinline>
     <source src="VIDEO1.mp4" type="video/mp4">
   </video>
 </div>
@@ -218,20 +215,31 @@ button{
   <button onclick="nextDedica()">Avanti</button>
 </div>
 
-<!-- SEGRETO -->
+<!-- SEGRETO (FIX RISE) -->
 <div id="evocazione" class="section">
-  <div class="hint">Se non sai la password, torna indietro</div>
+
+  <div style="font-size:18px;margin-bottom:10px;">
+    🔥 RISE
+  </div>
+
+  <div style="font-size:14px;margin-bottom:10px;">
+    Se non sai la password, riguarda la pagina precedente (Dediche)
+  </div>
+
   <input type="password" id="secretpw">
   <button onclick="secret()">entra</button>
+
 </div>
 
-<!-- AMORE -->
+<!-- 100 FRASI -->
 <div id="amore" class="section">
 
   <div id="counter"></div>
   <div id="frase"></div>
 
-  <button onclick="nextFrase()" style="position:absolute;bottom:40px;">avanti</button>
+  <button onclick="nextFrase()" style="position:absolute;bottom:40px;">
+    avanti
+  </button>
 
 </div>
 
@@ -255,7 +263,14 @@ function show(id){
   document.getElementById(id).classList.add("active");
 
   if(id==="amore") resetAmore();
-  if(id==="dediche") showDedica();
+
+  if(id==="cinema"){
+    const v=document.getElementById("videoCinema");
+    if(v){
+      v.currentTime=0;
+      v.play();
+    }
+  }
 }
 
 /* SEGRETO */
@@ -273,7 +288,7 @@ function secret(){
 }
 
 /* DEDICHE */
-const dediche = [
+const dediche=[
 "Accanto a te tutto sembra più leggero.",
 "Mi basta un tuo sguardo per stare bene.",
 "Ogni istante con te è un regalo.",
@@ -289,45 +304,41 @@ const dediche = [
 
 let d=0;
 
-function showDedica(){
-  document.getElementById("dedicaText").innerText = dediche[d];
-}
-
 function nextDedica(){
   d=(d+1)%dediche.length;
-  showDedica();
+  document.getElementById("dedicaText").innerText=dediche[d];
 }
 
-/* 100 FRASI COMPLETE */
+/* 100 FRASI */
 const frasi = [
 "I tuoi occhi quando mi cerchi","Il tuo sorriso improvviso","La tua risata che riempie tutto","Il tuo modo di guardarmi",
-"Quando fai finta di essere arrabbiata","La tua dolcezza nei dettagli","Il tuo profumo che resta","La tua voce nei messaggi",
-"Quando mi scrivi senza motivo","Quando mi pensi davvero","Quando torni da me","Quando mi stringi forte",
-"Quando mi guardi e capisci tutto","Quando non serve parlare","Quando resti anche se puoi andare","La tua sincerità",
-"La tua fragilità","La tua forza","Quando ridi senza motivo","Quando sei gelosa",
-"Quando sorridi","Quando mi cerchi","Quando mi perdi","Quando mi ritrovi",
-"Quando mi pensi di notte","Quando mi abbracci","Quando mi ascolti","Quando mi fai ridere",
-"Quando mi fai impazzire","Quando sei semplicemente tu",
-"Quando non reciti nulla","Quando sei vera","Quando mi fai sentire casa","Quando mi fai sentire scelto",
-"Quando mi vuoi vicino","Quando resti sempre","Quando non scappi","Quando mi capisci",
-"Quando mi fai perdere la testa","Quando mi fai sorridere","Quando mi pensi sempre","Quando diventi il mio rifugio",
-"Quando diventi il mio caos","Quando diventi la mia pace","Quando sei tutto insieme","Quando sei luce",
-"Quando sei il mio posto sicuro","Quando sei la mia scelta","Quando mi ami senza dirlo",
-"Quando mi scegli ogni giorno","Quando resti anche nei momenti difficili","Quando nonostante tutto sei qui",
-"Quando mi fai sentire vivo","Quando mi fai sentire unico","Quando mi guardi come nessuno",
-"Quando sei il mio mondo","Quando sei semplicemente te"
+"Quando fai finta di essere arrabbiata","La tua dolcezza","Il tuo profumo","La tua voce","Quando mi scrivi","Quando mi pensi",
+"Quando torni da me","Quando mi stringi","Quando mi guardi e capisci tutto","Quando non serve parlare",
+"Quando resti","La tua sincerità","La tua fragilità","La tua forza","Quando ridi","Quando sei gelosa",
+"Quando sorridi","Quando mi cerchi","Quando mi perdi","Quando mi ritrovi","Quando mi pensi di notte",
+"Quando mi abbracci","Quando mi ascolti","Quando mi fai ridere","Quando mi fai impazzire","Quando sei tu",
+"Quando non reciti","Quando sei vera","Quando mi fai sentire casa","Quando mi fai sentire scelto","Quando mi vuoi vicino",
+"Quando resti sempre","Quando non scappi","Quando mi capisci","Quando mi fai perdere la testa","Quando mi sorridi",
+"Quando mi pensi","Quando diventi il mio rifugio","Quando diventi la mia pace","Quando sei luce","Quando sei il mio posto sicuro",
+"Quando sei la mia scelta","Quando mi scegli","Quando resti nei momenti difficili","Quando sei qui","Quando mi fai vivere",
+"Quando mi guardi","Quando sei il mio mondo","Quando ridi con gli occhi","Quando sorridi piano","Quando mi stringi la mano",
+"Quando torni da me","Quando mi rendi migliore","Quando sei il mio pensiero fisso","Quando sei il mio equilibrio","Quando sei il mio disordine",
+"Quando sei il mio destino","Quando sei il mio sempre","Quando esisti","Quando mi fai sentire a casa","Quando sei ciò che volevo",
+"Quando resti anche quando non serve","Quando mi guardi e fermi tutto","Quando sei la mia costante","Quando sei il mio silenzio",
+"Quando mi scegli senza motivo","Quando sei la parte migliore di me","Quando sei tutto quello che cercavo","Quando sei mia"
 ];
 
 let index=0;
 
 function showFrase(){
   const el=document.getElementById("frase");
+
   el.classList.remove("show");
 
   setTimeout(()=>{
-    el.innerText = frasi[index];
+    el.innerText=frasi[index];
     el.classList.add("show");
-    document.getElementById("counter").innerText = `${index+1}/100`;
+    document.getElementById("counter").innerText=`${index+1}/100`;
   },300);
 }
 
@@ -345,22 +356,30 @@ function resetAmore(){
   showFrase();
 }
 
-/* FINALE NETFLIX */
+/* FINALE */
 function finale(){
   document.getElementById("amore").innerHTML=`
     <div id="finale">
-      <div style="font-size:32px;margin-bottom:20px;">Ti ami adesso?</div>
+
+      <div style="font-size:32px;margin-bottom:20px;">
+        Ti ami adesso?
+      </div>
 
       <button class="netflix-btn" onclick="choice()">Sì</button>
       <button class="netflix-btn" onclick="choice()">No</button>
 
       <div id="out" style="margin-top:20px;font-size:22px;"></div>
+
+      <button onclick="resetAmore()" style="margin-top:20px;">
+        Rileggi lo stesso
+      </button>
+
     </div>
   `;
 }
 
 function choice(){
-  document.getElementById("out").innerHTML="<b>Rileggi lo stesso</b>";
+  document.getElementById("out").innerHTML="Rileggi lo stesso";
 }
 
 /* CUORI */
