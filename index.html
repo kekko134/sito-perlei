@@ -31,17 +31,6 @@ body{
   margin-bottom:20px;
 }
 
-/* HOME ICON */
-#homeBtn{
-  position:fixed;
-  top:15px;
-  left:15px;
-  font-size:26px;
-  cursor:pointer;
-  z-index:20;
-  display:none;
-}
-
 /* NAV */
 #nav{
   position:fixed;
@@ -60,7 +49,6 @@ button{
   background:rgba(43,108,255,0.6);
   color:white;
   cursor:pointer;
-  backdrop-filter: blur(10px);
 }
 
 /* SEZIONI */
@@ -91,68 +79,13 @@ button{
   width:100%;
   height:100%;
   object-fit:cover;
-  filter:brightness(0.85);
-  transition:0.6s;
-  cursor:pointer;
-}
-
-#home img:hover{
-  transform:scale(1.05);
-  filter:brightness(1);
 }
 
 /* VIDEO */
-#cinema{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:black;
-}
-
 #cinema video{
   width:100%;
   height:100%;
   object-fit:cover;
-}
-
-/* DEDICHE */
-#emozioni{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.dedica{
-  position:absolute;
-  width:80%;
-  font-size:40px;
-  line-height:1.4;
-  opacity:0;
-  transform:scale(1.1);
-  transition:1s ease;
-  color:#d9ecff;
-}
-
-.dedica.active{
-  opacity:1;
-  transform:scale(1);
-}
-
-/* SEGRETO */
-#evocazione{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-}
-
-#evocazione input{
-  padding:10px;
-  border-radius:10px;
-  border:none;
-  margin-top:10px;
 }
 
 /* CUORI */
@@ -166,18 +99,16 @@ button{
 }
 
 @keyframes fall{
-  to{
-    transform: translateY(110vh);
-  }
+  to{ transform: translateY(110vh); }
 }
 
-/* AMORE SECTION */
+/* AMORE */
 #amore{
   display:flex;
   justify-content:center;
   align-items:center;
-  text-align:center;
   flex-direction:column;
+  text-align:center;
 }
 
 #frase{
@@ -205,14 +136,10 @@ button{
   <button onclick="login()">Entra</button>
 </div>
 
-<!-- HOME ICON -->
-<div id="homeBtn" onclick="show('home')">🏠</div>
-
 <!-- NAV -->
 <div id="nav">
   <button onclick="show('home')">Home</button>
   <button onclick="show('cinema')">Memorie</button>
-  <button onclick="show('emozioni')">Pensieri</button>
   <button onclick="show('evocazione')">Segreto</button>
   <button onclick="show('amore')">Quello che amo di te</button>
 </div>
@@ -235,17 +162,6 @@ button{
   </video>
 </div>
 
-<!-- DEDICHE -->
-<div id="emozioni" class="section">
-
-  <div class="dedica active">A volte basta un tuo sguardo per cambiare tutto.</div>
-  <div class="dedica">Mi perdo nei dettagli che ti rendono unica.</div>
-  <div class="dedica">Ogni pensiero porta inevitabilmente a te.</div>
-  <div class="dedica">Resta: è l’unica cosa che vorrei chiederti.</div>
-
-  <button onclick="nextDedica()" style="position:absolute;bottom:40px;">cambia pensiero</button>
-</div>
-
 <!-- SEGRETO -->
 <div id="evocazione" class="section">
   <input type="password" id="secretpw" placeholder="inserisci codice">
@@ -256,9 +172,7 @@ button{
 <div id="amore" class="section">
 
   <div id="hearts"></div>
-
   <div id="counter"></div>
-
   <div id="frase"></div>
 
   <button onclick="nextFrase()" style="position:absolute;bottom:40px;">
@@ -277,7 +191,6 @@ function login(){
     document.getElementById("login").style.display="none";
     document.getElementById("app").style.display="block";
     document.getElementById("nav").style.display="block";
-    document.getElementById("homeBtn").style.display="block";
   }
 }
 
@@ -288,41 +201,34 @@ function show(id){
   });
   document.getElementById(id).classList.add("active");
 
-  if(id === "amore"){
-    resetAmore();
-  }
+  if(id==="amore") resetAmore();
 }
 
-/* DEDICHE */
-let i=0;
-let dediche = document.querySelectorAll(".dedica");
-
-function nextDedica(){
-  dediche.forEach(d=>d.classList.remove("active"));
-  i=(i+1)%dediche.length;
-  dediche[i].classList.add("active");
-}
-
-/* SEGRETO */
+/* SEGRETO (MODIFICATO COME HAI CHIESTO) */
 function secret(){
   if(document.getElementById("secretpw").value==="amoreaeterno"){
     document.getElementById("evocazione").innerHTML=`
-      <div style="font-size:22px;line-height:1.7;color:#d9ecff;padding:30px;">
-        Quando ti guardo, tutto cambia.
-        Con te perdo ordine e trovo senso.
+      <div style="font-size:22px;line-height:1.7;padding:30px;color:#d9ecff;">
+        Ho passato 17 anni a vivere in modo razionale, secondo i miei numeri e la mia rigida matematica.<br><br>
+
+        Quando ti guardo capisco che tutto cambia.<br>
+        Con te non cerco più ordine, cerco verità.<br>
+        E in quella verità ci sei sempre tu.
       </div>
     `;
   }
 }
 
-/* AMORE */
+/* 100 FRASI */
 const frasi = [
-"I tuoi occhi","Il tuo sorriso","La tua dolcezza","Il tuo profumo",
-"La tua risatina","Quando dormiremo insieme","Il fatto che con te tutto ha senso",
+"I tuoi occhi","Il tuo sorriso","La tua dolcezza","Quando fai la gelosa",
+"Le tue labbra","Il tuo profumo","La tua energia","La tua voce",
+"La tua risatina","Quando dormiremo insieme","Il tuo cuore",
 "Quando mi scrivi ti amo sul quaderno","Quando riesci a toccarmi l’anima"
 ];
 
-let index = 0;
+/* SISTEMA */
+let index=0;
 
 function showFrase(){
   document.getElementById("counter").innerText = `${index+1} / ${frasi.length}`;
@@ -332,13 +238,12 @@ function showFrase(){
 function nextFrase(){
   index++;
 
-  if(index >= frasi.length){
-    document.getElementById("frase").innerHTML = `
+  if(index>=frasi.length){
+    document.getElementById("frase").innerHTML=`
       <div style="font-size:34px;font-weight:bold;">
         Ti ami adesso?
-      </div>
-    `;
-    document.getElementById("counter").innerText = "";
+      </div>`;
+    document.getElementById("counter").innerText="";
     return;
   }
 
@@ -346,20 +251,19 @@ function nextFrase(){
 }
 
 function resetAmore(){
-  index = 0;
+  index=0;
   showFrase();
 }
 
 /* CUORI */
 function spawnHeart(){
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "🤍";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (3 + Math.random()*4) + "s";
-  document.getElementById("hearts").appendChild(heart);
-
-  setTimeout(()=>heart.remove(),8000);
+  const h=document.createElement("div");
+  h.classList.add("heart");
+  h.innerHTML="🤍";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(3+Math.random()*4)+"s";
+  document.getElementById("hearts").appendChild(h);
+  setTimeout(()=>h.remove(),8000);
 }
 
 setInterval(spawnHeart,300);
