@@ -28,7 +28,6 @@ body{
   font-size:42px;
   color:#7fd3ff;
   text-shadow:0 0 20px #2b6cff;
-  margin-bottom:20px;
 }
 
 /* NAV */
@@ -38,9 +37,9 @@ body{
   left:50%;
   transform:translateX(-50%);
   display:none;
-  z-index:10;
 }
 
+/* BUTTON */
 button{
   margin:5px;
   padding:10px 15px;
@@ -95,7 +94,6 @@ button{
   color:white;
   font-size:14px;
   animation: fall linear forwards;
-  opacity:0.8;
 }
 
 @keyframes fall{
@@ -131,7 +129,6 @@ button{
 <!-- LOGIN -->
 <div id="login">
   <div id="title">Ciao amore, questo è per te</div>
-  <h3>Inserisci la password</h3>
   <input type="password" id="pw">
   <button onclick="login()">Entra</button>
 </div>
@@ -164,7 +161,7 @@ button{
 
 <!-- SEGRETO -->
 <div id="evocazione" class="section">
-  <input type="password" id="secretpw" placeholder="inserisci codice">
+  <input type="password" id="secretpw">
   <button onclick="secret()">entra</button>
 </div>
 
@@ -172,6 +169,7 @@ button{
 <div id="amore" class="section">
 
   <div id="hearts"></div>
+
   <div id="counter"></div>
   <div id="frase"></div>
 
@@ -204,13 +202,12 @@ function show(id){
   if(id==="amore") resetAmore();
 }
 
-/* SEGRETO (MODIFICATO COME HAI CHIESTO) */
+/* SEGRETO */
 function secret(){
   if(document.getElementById("secretpw").value==="amoreaeterno"){
     document.getElementById("evocazione").innerHTML=`
       <div style="font-size:22px;line-height:1.7;padding:30px;color:#d9ecff;">
         Ho passato 17 anni a vivere in modo razionale, secondo i miei numeri e la mia rigida matematica.<br><br>
-
         Quando ti guardo capisco che tutto cambia.<br>
         Con te non cerco più ordine, cerco verità.<br>
         E in quella verità ci sei sempre tu.
@@ -219,19 +216,40 @@ function secret(){
   }
 }
 
-/* 100 FRASI */
+/* 🔥 100 FRASI COMPLETE */
 const frasi = [
-"I tuoi occhi","Il tuo sorriso","La tua dolcezza","Quando fai la gelosa",
-"Le tue labbra","Il tuo profumo","La tua energia","La tua voce",
-"La tua risatina","Quando dormiremo insieme","Il tuo cuore",
-"Quando mi scrivi ti amo sul quaderno","Quando riesci a toccarmi l’anima"
+"I tuoi occhi","Il tuo sorriso","La tua dolcezza","Quando fai la gelosa","Le tue labbra",
+"Il tuo profumo","La tua energia","La tua intelligenza","La tua voce","La tua pazienza",
+"La tua sincerità","I tuoi abbracci","La tua eleganza","Il tuo modo di guardarmi","I tuoi gesti",
+"La tua risatina","Quando riesci a toccarmi l’anima","Quando dormiremo insieme","Il tuo cuore",
+"Quando mi scrivi ti amo sul quaderno","La tua fragilità","Il tuo carattere","La tua forza",
+"La tua dolcezza improvvisa","Il tuo modo di arrabbiarti","Quando fai il muretto","Il tuo sguardo perso",
+"Quando ridi senza motivo","Il modo in cui mi pensi","Quando mi cerchi","Quando mi perdi",
+"Quando mi ritrovi","La tua sincerità disarmante","Quando mi stringi forte","Il tuo profumo sui miei vestiti",
+"Quando mi guardi in silenzio","Il tuo modo di proteggermi","La tua gelosia","La tua libertà",
+"Il tuo modo di amare","Il tuo modo di vivere","Quando metti il rossettino","Quando sorridi appena sveglia",
+"Quando mi scrivi senza motivo","Quando mi pensi la notte","Quando mi chiami","Quando mi ascolti",
+"Quando mi capisci","Quando mi fai ridere","Quando mi fai pensare","Quando mi cambi la giornata",
+"Quando mi manchi","Quando mi vuoi","Quando resti","Quando non vai via","Quando torni",
+"Quando dormiamo insieme","Quando parli dei tuoi sogni","Quando mi racconti tutto","Quando ti apri",
+"Quando ti chiudi e poi torni","Quando mi guardi male per gioco","Quando fai il broncio",
+"Quando ridi piano","Quando ti stringi a me","Quando mi cerchi con gli occhi",
+"Quando mi fai sentire casa","Quando sei fragile","Quando sei forte","Quando sei te stessa",
+"Quando sei mia","Quando sei lontana","Quando sei vicina","Quando sei tutto",
+"Quando mi scegli","Quando mi vuoi bene","Quando mi ami","Quando resti con me",
+"Quando non scappi","Quando mi parli del gelato","Quando mi stringi forte a te",
+"Quando mi guardi e sorridi","Quando sei gelosa","Quando mi fai impazzire","Quando sei perfetta",
+"Quando sei imperfetta","Quando sei unica","Quando sei mia ancora",
+"Quando mi pensi davvero","Quando mi fai battere il cuore","Quando mi guardi come nessuno",
+"Quando mi fai sentire vivo","Quando sei il mio posto sicuro","Quando sei tutto quello che voglio",
+"Quando mi scegli ogni giorno","Quando nonostante tutto resti"
 ];
 
 /* SISTEMA */
 let index=0;
 
 function showFrase(){
-  document.getElementById("counter").innerText = `${index+1} / ${frasi.length}`;
+  document.getElementById("counter").innerText = `${index+1}/100`;
   document.getElementById("frase").innerText = frasi[index];
 }
 
