@@ -179,7 +179,7 @@ input {
 
   <div id="evocazione" class="section">
     <div class="glass-box" id="secretBox">
-      <h2 style="margin-bottom: 20px;">Il mio segreto</h2>
+      <h2 style="margin-bottom: 20px;">Sblocca il segreto</h2>
       <p style="font-size:14px; margin-bottom:20px; opacity: 0.8;">
         Se non sai cosa inserire riguarda la pagina precedente
       </p>
@@ -202,7 +202,7 @@ input {
 const frasi = [
   "i tuoi occhi", "il tuo sorriso", "la tua dolcezza", "quando fai la gelosa", "le tue labbra", 
   "il tuo profumo", "la tua energia positiva", "la tua intelligenza", "la tua voce", "la tua pazienza",
-  "la tua sincerità", "i tuoi abbracci", "la tua eleganza", "il modo in cui mi guardi", "i tuoi gesti affettuosi",
+  "la tua sincerità", "i tuoi abbracci", "la tua eleganza", "il modo in cui mi guarda", "i tuoi gesti affettuosi",
   "il tuo lato romantico", "la tua buonanotte", "le tue guance", "la tua simpatia", "la tua forza",
   "la tua voglia di vivere", "la tua risata", "la tua curiosità", "la tua fantasia", "la tua profondità",
   "il modo in cui mi parli", "il tuo collo", "la tua fragilità", "la tua emotività", "i tuoi capelli",
@@ -213,8 +213,8 @@ const frasi = [
   "i tuoi baci sul collo", "la tua voglia di fare viaggi insieme", "i tuoi \"dimmi quando arrivi a casa\"", "la tua cicatrice", "ancora i tuoi occhi, perché sono i più belli del 🌍",
   "la tua bellezza", "il tuo cuore", "il tuo amore che comprende", "i tuoi dolci", "la tua capacità di farmi battere il cuore",
   "come ogni posto con te diventi bellissimo", "come mangi", "quando reposta video sul nostro amore", "fare la doccia insieme", "quando mi scioglie l'anima",
-  "quando mi pensa sempre", "quando mi includi nei tuoi piani", "quando fai l'offesa per gioco", "come mi capisce con un solo sguardo", "quando mi stringi forte a te",
-  "quando mi mandi video su tik tok", "quando mi aiuti a non fare scelte sbagliate", "come canti", "quando mi racconti la sua giornata", "quando ti appoggi sulla mia spalla",
+  "quando mi pensa sempre", "quando mi include nei suoi piani", "quando fai l'offesa per gioco", "come mi capisci con un solo sguardo", "quando mi stringi forte a te",
+  "quando mi mandi video su tik tok", "quando mi aiuti a non fare scelte sbagliate", "come canti", "quando mi racconti la tua giornata", "quando ti appoggi sulla mia spalla",
   "i tuoi occhi quando diventano lucidi", "il tuo modo di parlare", "bere insieme", "mangiare insieme", "quando mi scrivi che ti manco",
   "il tuo modo di rassicurarmi", "quando mi scrivi sul quaderno", "quando mi parli dei tuoi cibi preferiti", "quando mi parli dei tuoi sogni", "come mi sorride anche da arrabbiata",
   "il tuo odore nei miei vestiti", "quando mostri la tua intelligenza", "le nostre chiamate", "il destino che ci ha fatto incontrare", "quando immagini un futuro di noi",
@@ -304,11 +304,10 @@ function nextDedica(){
 }
 
 function secret(){
-  if(document.getElementById("secretpw").value==="amoreeterno"){
+  if(document.getElementById("secretpw").value==="amoreaeterno"){
     document.getElementById("secretBox").innerHTML = `
       <div style="font-size:22px; line-height:1.6; color:white;">
-        Ho vissuto 17 anni cercando di essere razionale
-        seconfo le regole della mia rigina matematica.<br>
+        Ho vissuto 17 anni nella logica.<br><br>
         Quando ti guardo tutto cambia.<br>
         Con te non cerco ordine, cerco verità.<br>
         E in quella verità ci sei tu.
