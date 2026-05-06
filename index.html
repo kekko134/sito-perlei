@@ -5,181 +5,130 @@
 <title>Per Te</title>
 
 <style>
-body{
-  margin:0;
-  font-family: Arial;
-  overflow:hidden;
-  color:white;
-  background: radial-gradient(circle at top,#0a2fff,#020b1a);
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  color: white;
+  background-color: #020b1a; 
+  background: radial-gradient(circle at top, #0a2fff, #020b1a);
+  height: 100vh;
 }
 
-/* HOME ICON */
-#homeBtn{
-  position:fixed;
-  top:15px;
-  left:15px;
-  font-size:30px;
-  cursor:pointer;
-  z-index:1000;
-  display:none;
+#homeBtn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1000;
+  display: none;
 }
 
-/* NAV */
-#nav{
-  position:fixed;
-  top:15px;
-  left:50%;
-  transform:translateX(-50%);
-  display:none;
-  z-index:1000;
+#nav {
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  z-index: 1000;
 }
 
-button{
-  padding:10px 15px;
-  margin:5px;
-  border:none;
-  border-radius:10px;
-  background:rgba(255,255,255,0.15);
-  color:white;
-  cursor:pointer;
+button {
+  padding: 12px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+  font-weight: bold;
 }
 
-/* SEZIONI */
-.section{
-  position:absolute;
-  width:100vw;
-  height:100vh;
-  top:0;
-  left:0;
-  opacity:0;
-  pointer-events:none;
-  transition:1s ease;
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
 }
 
-.section.active{
-  opacity:1;
-  pointer-events:all;
+.section {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-/* HOME */
-#home{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:1fr 1fr;
+.section.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
-#home img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+#frase {
+  width: 80%;
+  font-size: 32px;
+  text-align: center;
+  line-height: 1.4;
+  text-shadow: 0 0 20px rgba(255,255,255,0.4);
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: scale(0.5);
+  filter: blur(10px);
+  opacity: 0;
 }
 
-/* VIDEO */
-#cinema video{
-  width:100vw;
-  height:100vh;
-  object-fit:cover;
+#frase.show {
+  transform: scale(1);
+  filter: blur(0);
+  opacity: 1;
 }
 
-/* DEDICHE */
-#dediche{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
+#counter {
+  position: absolute;
+  top: 100px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  opacity: 0.7;
 }
 
-#dedicaText{
-  width:80%;
-  font-size:26px;
-}
-
-/* SEGRETO */
-#evocazione{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-}
-
-#evocazione input{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  text-align:center;
-}
-
-/* 100 FRASI */
-#amore{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-}
-
-#frase{
-  width:80%;
-  font-size:28px;
-  opacity:0;
-  transform:scale(1.05);
-  filter:blur(6px);
-  transition:1s ease;
-}
-
-#frase.show{
-  opacity:1;
-  transform:scale(1);
-  filter:blur(0);
-}
-
-#counter{
-  position:absolute;
-  top:20px;
-}
-
-/* FINALE */
-#finale{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  height:100vh;
-}
-
-.netflix-btn{
-  font-size:22px;
-  padding:12px 25px;
-  margin:10px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.1);
-  border:1px solid white;
-}
-
-/* CUORI */
-.heart{
-  position:absolute;
-  top:-20px;
-  color:white;
-  font-size:14px;
+.heart {
+  position: absolute;
+  top: -20px;
+  color: white;
   animation: fall linear forwards;
+  pointer-events: none;
 }
 
-@keyframes fall{
-  to{ transform: translateY(110vh); }
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+
+input {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 15px;
+  text-align: center;
 }
 </style>
 </head>
-
 <body>
 
-<!-- LOGIN -->
-<div id="login" style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;">
+<div id="login" class="section active" style="opacity: 1; pointer-events: all;">
   <h1>Ciao amore</h1>
-  <input type="password" id="pw">
-  <button onclick="login()">Entra</button>
+  <input type="password" id="pw" placeholder="Password magica...">
+  <button onclick="login()">Entra nel mio cuore</button>
 </div>
 
 <div id="homeBtn" onclick="show('home')">🏠</div>
@@ -189,105 +138,130 @@ button{
   <button onclick="show('cinema')">Video</button>
   <button onclick="show('dediche')">Dediche</button>
   <button onclick="show('evocazione')">Segreto</button>
-  <button onclick="show('amore')">100 cose</button>
+  <button onclick="show('amore')">Ciò che amo di te</button>
 </div>
 
 <div id="app" style="display:none">
-
-<!-- HOME -->
-<div id="home" class="section active">
-  <img src="foto1.jpg">
-  <img src="foto2.jpg">
-  <img src="foto3.jpg">
-  <img src="foto4.jpg">
-</div>
-
-<!-- VIDEO -->
-<div id="cinema" class="section">
-  <video id="videoCinema" controls playsinline>
-    <source src="VIDEO1.mp4" type="video/mp4">
-  </video>
-</div>
-
-<!-- DEDICHE -->
-<div id="dediche" class="section">
-  <div id="dedicaText"></div>
-  <button onclick="nextDedica()">Avanti</button>
-</div>
-
-<!-- SEGRETO (FIX RISE) -->
-<div id="evocazione" class="section">
-
-  <div style="font-size:18px;margin-bottom:10px;">
-    🔥 RISE
+  <div id="home" class="section">
+    <div style="display:grid; grid-template-columns:1fr 1fr; width:100%; height:100%;">
+        <img src="foto1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        <img src="foto2.jpg" style="width:100%; height:100%; object-fit:cover;">
+        <img src="foto3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        <img src="foto4.jpg" style="width:100%; height:100%; object-fit:cover;">
+    </div>
   </div>
 
-  <div style="font-size:14px;margin-bottom:10px;">
-    Se non sai la password, riguarda la pagina precedente (Dediche)
+  <div id="cinema" class="section">
+    <video id="videoCinema" style="width:100%; height:100%; object-fit:contain;" controls>
+      <source src="VIDEO1.mp4" type="video/mp4">
+    </video>
   </div>
 
-  <input type="password" id="secretpw">
-  <button onclick="secret()">entra</button>
+  <div id="dediche" class="section">
+    <div id="dedicaText" style="font-size:24px; text-align:center; width:80%;"></div>
+    <button onclick="nextDedica()" style="margin-top:30px;">Un altro pensiero...</button>
+  </div>
 
-</div>
+  <div id="evocazione" class="section">
+    <div id="secretBox" style="text-align:center;">
+      <p style="font-size:20px; margin-bottom:5px;">🔥 RISE</p>
+      <p style="font-size:14px; color:rgba(255,255,255,0.7); margin-bottom:20px;">
+        Se non sai cosa inserire riguarda la pagina precedente
+      </p>
+      <input type="password" id="secretpw" placeholder="La parola segreta...">
+      <br>
+      <button onclick="secret()">Sblocca</button>
+    </div>
+  </div>
 
-<!-- 100 FRASI -->
-<div id="amore" class="section">
-
-  <div id="counter"></div>
-  <div id="frase"></div>
-
-  <button onclick="nextFrase()" style="position:absolute;bottom:40px;">
-    avanti
-  </button>
-
-</div>
-
+  <div id="amore" class="section">
+    <div id="counter"></div>
+    <div id="frase"></div>
+    <button id="btnDolce" style="position:absolute; bottom:80px;" onclick="nextFrase()"></button>
+  </div>
 </div>
 
 <script>
+const frasi = [
+  "i suoi occhi", "il suo sorriso", "la sua dolcezza", "quando fa la gelosa", "le sue labbra", 
+  "il suo profumo", "la sua energia positiva", "la sua intelligenza", "la sua voce", "la sua pazienza",
+  "la sua sincerità", "i suoi abbracci", "la sua eleganza", "il modo in cui mi guarda", "i suoi gesti affettuosi",
+  "il suo lato romantico", "la sua buonanotte", "le sue guance", "la sua simpatia", "la sua forza",
+  "la sua voglia di vivere", "la sua risata", "la sua curiosità", "la sua fantasia", "la sua profondità",
+  "il modo in cui mi parla", "il suo collo", "la sua fragilità", "la sua emotività", "i suoi capelli",
+  "il bambino dentro di me che riesce a fare uscire", "il suo modo di ballare", "il suo sarcasmo", "la sua lealtà", "il suo modo di rispettarmi",
+  "i suoi giochi di sguardo", "la sua passione nei baci", "la sua femminilità", "il suo carattere unico", "la sua attenzione nei dettagli",
+  "la sua capacità di farmi sentire speciale", "la sua bellezza interiore", "la sua coerenza", "il suo nasino", "quando mi parla del suo passato",
+  "le sue coccole", "la sua carica", "il suo modo di proteggermi", "il suo stile", "che sia pazza tanto quanto me",
+  "i suoi baci sul collo", "la sua voglia di fare viaggi insieme", "i sui \"dimmi quando arrivi a casa\"", "la sua cicatrice", "ancora i suoi occhi, perchè sono i più belli del 🌍",
+  "la sua bellezza", "il suo cuore", "il suo amore che comprende", "i suoi dolci", "la sua capacità di farmi battere il cuore",
+  "come ogni posto con lei diventi bellissimo", "come mangia", "quando reposta video sul nostro amore", "fare la doccia insieme", "quando mi scioglie l'anima",
+  "quando mi pensa sempre", "quando mi include nei suoi piani", "quando fa l'offesa per gioco", "come mi capisce con un solo sguardo", "quando mi stringe forte a se",
+  "quando mi manda video su tik tok", "quando mi aiuta a non fare scelte sbagliate", "come canta", "quando mi racconta la sua giornata", "quando si appoggia sulla mia spalla",
+  "i suoi occhi quando diventano lucidi", "il suo modo di parlare", "bere insieme", "mangiare insieme", "quando mi scrive che le manco",
+  "il suo modo di rassicurarmi", "quando mi scrive sul quaderno", "quando mi parla dei suoi cibi preferiti", "quando mi parla dei suoi sogni", "come mi sorride anche da arrabbiata",
+  "il suo odore nei miei vestiti", "quando mostra la sua intelligenza", "le nostre chiamate", "il destino che ci ha fatto incontrare", "quando immagina un futuro di noi",
+  "riesce a tirare fuori la versione migliore di me", "come trasforma i silenzi in qualcosa di pieno", "come riesce a farmi sentire fortunato", "il modo in cui resta nella mia testa anche quando è lontana", "da quando c'è lei, certi giorni sembrano avere più colore",
+  "che continua a farmi venire farfalle allo stomaco", "che mi manca anche se siamo stati insieme tutto il giorno", "è così bella che guardarla è la mia distrazione preferita", "è così bella che il tempo sembra rallentare solo per lasciarmela guardare un po' di più",
+  "Amo ogni singola cosa di lei così tanto che \"da morire\" non è una fine, è solo il limite più vicino che conosco per spiegare quello che provo."
+];
 
-/* LOGIN */
+const pulsantiDolci = ["E poi?", "Dimmi ancora...", "C'è altro?", "E ancora...", "Continua...", "Sei bellissima", "Ancora uno..."];
+let index = 0;
+
 function login(){
   if(document.getElementById("pw").value==="estasi contemplativa"){
     document.getElementById("login").style.display="none";
     document.getElementById("app").style.display="block";
     document.getElementById("nav").style.display="block";
     document.getElementById("homeBtn").style.display="block";
+    show('home');
   }
 }
 
-/* NAV */
 function show(id){
-  document.querySelectorAll(".section").forEach(e=>e.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-
-  if(id==="amore") resetAmore();
-
-  if(id==="cinema"){
-    const v=document.getElementById("videoCinema");
-    if(v){
-      v.currentTime=0;
-      v.play();
-    }
-  }
+  document.querySelectorAll(".section").forEach(e=> { e.classList.remove("active"); e.style.opacity="0"; });
+  const target = document.getElementById(id);
+  target.classList.add("active");
+  setTimeout(()=>target.style.opacity="1", 50);
+  if(id==='amore') { index=0; updateFrase(); }
 }
 
-/* SEGRETO */
-function secret(){
-  if(document.getElementById("secretpw").value==="amoreaeterno"){
-    document.getElementById("evocazione").innerHTML=`
-      <div style="font-size:20px;line-height:1.7;max-width:80%;">
-        Ho vissuto 17 anni nella logica.<br><br>
-        Quando ti guardo tutto cambia.<br>
-        Con te non cerco ordine, cerco verità.<br>
-        E in quella verità ci sei tu.
+function updateFrase(){
+  const el = document.getElementById("frase");
+  const btn = document.getElementById("btnDolce");
+  el.classList.remove("show");
+  
+  setTimeout(()=>{
+    el.innerText = frasi[index];
+    document.getElementById("counter").innerText = (index + 1) + " / 100";
+    btn.innerText = pulsantiDolci[Math.floor(Math.random()*pulsantiDolci.length)];
+    el.classList.add("show");
+  }, 400);
+}
+
+function nextFrase(){
+  if(index < frasi.length - 1){
+    index++;
+    updateFrase();
+  } else {
+    document.getElementById("amore").innerHTML = `
+      <h2 style="font-size:40px;">Ti ami adesso?</h2>
+      <div style="display:flex; gap:20px;">
+        <button onclick="finale()">Sì</button>
+        <button onclick="finale()">No</button>
       </div>
     `;
   }
 }
 
-/* DEDICHE */
+function finale(){
+  document.getElementById("amore").innerHTML = `
+    <p style="font-size:24px; text-align:center;">Rileggi tutto, perché è tutto vero.</p>
+    <button onclick="location.reload()">Rileggi</button>
+  `;
+}
+
 const dediche=[
 "Accanto a te tutto sembra più leggero.",
 "Mi basta un tuo sguardo per stare bene.",
@@ -301,101 +275,35 @@ const dediche=[
 "Non stancarti mai: splendi per sempre.",
 "Oltre il tempo, io sarò qui."
 ];
-
 let d=0;
-
 function nextDedica(){
-  d=(d+1)%dediche.length;
-  document.getElementById("dedicaText").innerText=dediche[d];
+  document.getElementById("dedicaText").innerText = dediche[d];
+  d = (d+1)%dediche.length;
 }
 
-/* 100 FRASI */
-const frasi = [
-"I tuoi occhi quando mi cerchi","Il tuo sorriso improvviso","La tua risata che riempie tutto","Il tuo modo di guardarmi",
-"Quando fai finta di essere arrabbiata","La tua dolcezza","Il tuo profumo","La tua voce","Quando mi scrivi","Quando mi pensi",
-"Quando torni da me","Quando mi stringi","Quando mi guardi e capisci tutto","Quando non serve parlare",
-"Quando resti","La tua sincerità","La tua fragilità","La tua forza","Quando ridi","Quando sei gelosa",
-"Quando sorridi","Quando mi cerchi","Quando mi perdi","Quando mi ritrovi","Quando mi pensi di notte",
-"Quando mi abbracci","Quando mi ascolti","Quando mi fai ridere","Quando mi fai impazzire","Quando sei tu",
-"Quando non reciti","Quando sei vera","Quando mi fai sentire casa","Quando mi fai sentire scelto","Quando mi vuoi vicino",
-"Quando resti sempre","Quando non scappi","Quando mi capisci","Quando mi fai perdere la testa","Quando mi sorridi",
-"Quando mi pensi","Quando diventi il mio rifugio","Quando diventi la mia pace","Quando sei luce","Quando sei il mio posto sicuro",
-"Quando sei la mia scelta","Quando mi scegli","Quando resti nei momenti difficili","Quando sei qui","Quando mi fai vivere",
-"Quando mi guardi","Quando sei il mio mondo","Quando ridi con gli occhi","Quando sorridi piano","Quando mi stringi la mano",
-"Quando torni da me","Quando mi rendi migliore","Quando sei il mio pensiero fisso","Quando sei il mio equilibrio","Quando sei il mio disordine",
-"Quando sei il mio destino","Quando sei il mio sempre","Quando esisti","Quando mi fai sentire a casa","Quando sei ciò che volevo",
-"Quando resti anche quando non serve","Quando mi guardi e fermi tutto","Quando sei la mia costante","Quando sei il mio silenzio",
-"Quando mi scegli senza motivo","Quando sei la parte migliore di me","Quando sei tutto quello che cercavo","Quando sei mia"
-];
-
-let index=0;
-
-function showFrase(){
-  const el=document.getElementById("frase");
-
-  el.classList.remove("show");
-
-  setTimeout(()=>{
-    el.innerText=frasi[index];
-    el.classList.add("show");
-    document.getElementById("counter").innerText=`${index+1}/100`;
-  },300);
-}
-
-function nextFrase(){
-  index++;
-  if(index>=100){
-    finale();
-    return;
+function secret(){
+  if(document.getElementById("secretpw").value==="amoreaeterno"){
+    document.getElementById("secretBox").innerHTML = `
+      <div style="font-size:22px; line-height:1.6; max-width:80%; margin: 0 auto;">
+        Ho vissuto 17 anni nella logica.<br><br>
+        Quando ti guardo tutto cambia.<br>
+        Con te non cerco ordine, cerco verità.<br>
+        E in quella verità ci sei tu.
+      </div>`;
   }
-  showFrase();
 }
 
-function resetAmore(){
-  index=0;
-  showFrase();
-}
-
-/* FINALE */
-function finale(){
-  document.getElementById("amore").innerHTML=`
-    <div id="finale">
-
-      <div style="font-size:32px;margin-bottom:20px;">
-        Ti ami adesso?
-      </div>
-
-      <button class="netflix-btn" onclick="choice()">Sì</button>
-      <button class="netflix-btn" onclick="choice()">No</button>
-
-      <div id="out" style="margin-top:20px;font-size:22px;"></div>
-
-      <button onclick="resetAmore()" style="margin-top:20px;">
-        Rileggi lo stesso
-      </button>
-
-    </div>
-  `;
-}
-
-function choice(){
-  document.getElementById("out").innerHTML="Rileggi lo stesso";
-}
-
-/* CUORI */
 function spawnHeart(){
   const h=document.createElement("div");
   h.classList.add("heart");
   h.innerHTML="🤍";
   h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(10+Math.random()*20)+"px";
   h.style.animationDuration=(3+Math.random()*4)+"s";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
+  setTimeout(()=>h.remove(),6000);
 }
-
-setInterval(spawnHeart,250);
-
+setInterval(spawnHeart,300);
 </script>
-
 </body>
 </html>
