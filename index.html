@@ -10,7 +10,6 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
   color: white;
-  /* Sfondo blu scuro ma leggibile */
   background: #020b1a;
   background: radial-gradient(circle at top, #0a2fff, #020b1a);
   height: 100vh;
@@ -74,7 +73,6 @@ button:hover {
   pointer-events: all;
 }
 
-/* Box per garantire la leggibilità */
 .glass-box {
   background: rgba(0, 0, 0, 0.6);
   padding: 40px;
@@ -181,7 +179,7 @@ input {
 
   <div id="evocazione" class="section">
     <div class="glass-box" id="secretBox">
-      <p style="font-size:20px; margin-bottom:5px;">🔥 RISE</p>
+      <h2 style="margin-bottom: 20px;">Il mio segreto</h2>
       <p style="font-size:14px; margin-bottom:20px; opacity: 0.8;">
         Se non sai cosa inserire riguarda la pagina precedente
       </p>
@@ -214,14 +212,14 @@ const frasi = [
   "le tue coccole", "la tua carica", "il tuo modo di proteggermi", "il tuo stile", "che sei pazza tanto quanto me",
   "i tuoi baci sul collo", "la tua voglia di fare viaggi insieme", "i tuoi \"dimmi quando arrivi a casa\"", "la tua cicatrice", "ancora i tuoi occhi, perché sono i più belli del 🌍",
   "la tua bellezza", "il tuo cuore", "il tuo amore che comprende", "i tuoi dolci", "la tua capacità di farmi battere il cuore",
-  "come ogni posto con te diventi bellissimo", "come mangi", "quando reposti video sul nostro amore", "fare la doccia insieme", "quando mi sciogli l'anima",
-  "quando mi pensi sempre", "quando mi includi nei tuoi piani", "quando fai l'offesa per gioco", "come mi capisci con un solo sguardo", "quando mi stringi forte a te",
-  "quando mi mandi video su tik tok", "quando mi aiuti a non fare scelte sbagliate", "come canti", "quando mi racconti la tua giornata", "quando ti appoggi sulla mia spalla",
+  "come ogni posto con te diventi bellissimo", "come mangi", "quando reposta video sul nostro amore", "fare la doccia insieme", "quando mi scioglie l'anima",
+  "quando mi pensa sempre", "quando mi includi nei tuoi piani", "quando fai l'offesa per gioco", "come mi capisce con un solo sguardo", "quando mi stringi forte a te",
+  "quando mi mandi video su tik tok", "quando mi aiuti a non fare scelte sbagliate", "come canti", "quando mi racconti la sua giornata", "quando ti appoggi sulla mia spalla",
   "i tuoi occhi quando diventano lucidi", "il tuo modo di parlare", "bere insieme", "mangiare insieme", "quando mi scrivi che ti manco",
-  "il tuo modo di rassicurarmi", "quando mi scrivi sul quaderno", "quando mi parli dei tuoi cibi preferiti", "quando mi parli dei tuoi sogni", "come mi sorridi anche da arrabbiata",
+  "il tuo modo di rassicurarmi", "quando mi scrivi sul quaderno", "quando mi parli dei tuoi cibi preferiti", "quando mi parli dei tuoi sogni", "come mi sorride anche da arrabbiata",
   "il tuo odore nei miei vestiti", "quando mostri la tua intelligenza", "le nostre chiamate", "il destino che ci ha fatto incontrare", "quando immagini un futuro di noi",
   "riesci a tirare fuori la versione migliore di me", "come trasformi i silenzi in qualcosa di pieno", "come riesci a farmi sentire fortunato", "il modo in cui resti nella mia testa anche quando sei lontana", "da quando ci sei tu, certi giorni sembrano avere più colore",
-  "che continui a farmi venire farfalle allo stomaco", "che mi manchi anche se siamo stati insieme tutto il giorno", "sei così bella che guardarti è la mia distrazione preferita", "sei così bella che il tempo sembra rallentare solo per lasciarti guardare un po' di più",
+  "che continui a farmi venire farfalle allo stomaco", "che mi manchi anche se siamo stati insieme tutto il giorno", "sei così bella che guardarla è la mia distrazione preferita", "sei così bella che il tempo sembra rallentare solo per lasciarti guardare un po' di più",
   "Amo ogni singola cosa di te così tanto che \"da morire\" non è una fine, è solo il limite più vicino che conosco per spiegare quello che provo."
 ];
 
@@ -244,6 +242,7 @@ function show(id){
   target.classList.add("active");
   setTimeout(()=>target.style.opacity="1", 50);
   if(id==='amore') { index=0; updateFrase(); }
+  if(id==='dediche') { d=0; nextDedica(); }
 }
 
 function updateFrase(){
@@ -305,11 +304,11 @@ function nextDedica(){
 }
 
 function secret(){
-  if(document.getElementById("secretpw").value==="amoreaeterno"){
+  if(document.getElementById("secretpw").value==="amoreeterno"){
     document.getElementById("secretBox").innerHTML = `
       <div style="font-size:22px; line-height:1.6; color:white;">
-        Ho vissuto 17 anni cercando di essere razionale,
-        seguendo le ie rigide regole matematiche.<br><br>
+        Ho vissuto 17 anni cercando di essere razionale
+        seconfo le regole della mia rigina matematica.<br>
         Quando ti guardo tutto cambia.<br>
         Con te non cerco ordine, cerco verità.<br>
         E in quella verità ci sei tu.
