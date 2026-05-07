@@ -10,7 +10,6 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
   color: white;
-  /* EFFETTO NEBULOSA ANIMATA */
   background: linear-gradient(125deg, #020b1a, #0a2fff, #1a0a2f, #020b1a);
   background-size: 400% 400%;
   animation: gradientMove 15s ease infinite;
@@ -56,7 +55,6 @@ button {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* BAGLIORE MAGICO AI PULSANTI */
 button:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: scale(1.05);
@@ -157,7 +155,6 @@ input {
 <div id="homeBtn" onclick="show('home')">🏠</div>
 
 <div id="nav">
-  <button onclick="show('home')">Home</button>
   <button onclick="show('cinema')">Video</button>
   <button onclick="show('dediche')">Dediche</button>
   <button onclick="show('evocazione')">Segreto</button>
@@ -183,8 +180,8 @@ input {
 
   <div id="dediche" class="section">
     <div class="glass-box">
-        <div id="dedicaText" style="font-size:26px; min-height: 80px;"></div>
-        <button onclick="nextDedica()" style="margin-top:30px;">Un altro pensiero...</button>
+        <div id="dedicaText" style="font-size:26px; min-height: 100px; display: flex; align-items: center; justify-content: center;"></div>
+        <button id="btnNextDedica" onclick="nextDedica()" style="margin-top:30px;">Un altro pensiero...</button>
     </div>
   </div>
 
@@ -253,7 +250,7 @@ function show(id){
   target.classList.add("active");
   setTimeout(()=>target.style.opacity="1", 50);
   if(id==='amore') { index=0; updateFrase(); }
-  if(id==='dediche') { d=0; nextDedica(); }
+  if(id==='dediche') { d=0; document.getElementById("dedicaText").innerText = ""; nextDedica(); }
 }
 
 function updateFrase(){
@@ -269,7 +266,6 @@ function updateFrase(){
   }, 400);
 }
 
-/* ESPLOSIONE DI CUORI */
 function burstHearts() {
   for(let i=0; i<15; i++) {
     setTimeout(spawnHeart, i * 40);
@@ -277,7 +273,7 @@ function burstHearts() {
 }
 
 function nextFrase(){
-  burstHearts(); // Trigger esplosione al click
+  burstHearts();
   if(index < frasi.length - 1){
     index++;
     updateFrase();
@@ -317,19 +313,30 @@ const dediche=[
 "Oltre il tempo, io sarò qui."
 ];
 let d=0;
+let isTyping = false;
 
-/* EFFETTO SCRITTURA PER DEDICHE */
 function nextDedica() {
+  if (isTyping) return; 
+  
   const testoDaScrivere = dediche[d];
   const contenitore = document.getElementById("dedicaText");
+  const btn = document.getElementById("btnNextDedica");
+  
   contenitore.innerText = ""; 
+  isTyping = true;
+  btn.style.opacity = "0.5";
+  btn.style.pointerEvents = "none";
+  
   let i = 0;
-
   function scrivi() {
     if (i < testoDaScrivere.length) {
       contenitore.innerText += testoDaScrivere.charAt(i);
       i++;
       setTimeout(scrivi, 50);
+    } else {
+      isTyping = false;
+      btn.style.opacity = "1";
+      btn.style.pointerEvents = "all";
     }
   }
   scrivi();
@@ -337,10 +344,11 @@ function nextDedica() {
 }
 
 function secret(){
-  if(document.getElementById("secretpw").value==="amoreaeterno"){
+  if(document.getElementById("secretpw").value==="amoreeterno"){
     document.getElementById("secretBox").innerHTML = `
       <div style="font-size:22px; line-height:1.6; color:white;">
-        Ho vissuto 17 anni nella logica.<br><br>
+        Ho vissuto 17 anni cercando di essere razionale
+        secondo i criteri dell mia rigica matematica.<br>
         Quando ti guardo tutto cambia.<br>
         Con te non cerco ordine, cerco verità.<br>
         E in quella verità ci sei tu.
@@ -348,7 +356,6 @@ function secret(){
   }
 }
 
-/* SPAWN CUORI BIANCHI MIGLIORATO */
 function spawnHeart(){
   const h=document.createElement("div");
   h.classList.add("heart");
