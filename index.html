@@ -118,6 +118,17 @@ button:hover {
   margin-bottom: 20px;
 }
 
+/* STILE DEDICHE CORRETTO PER GLI SPAZI */
+#dedicaText {
+  font-size: 26px; 
+  min-height: 100px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  white-space: pre-wrap; /* Impedisce alle parole di attaccarsi */
+  word-wrap: break-word;
+}
+
 .heart {
   position: absolute;
   top: -20px;
@@ -167,8 +178,6 @@ input {
     <div style="display:grid; grid-template-columns:1fr 1fr; width:100%; height:100%;">
         <img src="foto1.jpg" style="width:100%; height:100%; object-fit:cover;">
         <img src="foto2.jpg" style="width:100%; height:100%; object-fit:cover;">
-        <img src="foto3.jpg" style="width:100%; height:100%; object-fit:cover;">
-        <img src="foto4.jpg" style="width:100%; height:100%; object-fit:cover;">
     </div>
   </div>
 
@@ -180,7 +189,7 @@ input {
 
   <div id="dediche" class="section">
     <div class="glass-box">
-        <div id="dedicaText" style="font-size:26px; min-height: 100px; display: flex; align-items: center; justify-content: center;"></div>
+        <div id="dedicaText"></div>
         <button id="btnNextDedica" onclick="nextDedica()" style="margin-top:30px;">Un altro pensiero...</button>
     </div>
   </div>
@@ -330,9 +339,10 @@ function nextDedica() {
   let i = 0;
   function scrivi() {
     if (i < testoDaScrivere.length) {
+      // Usiamo charAt per catturare anche lo spazio vuoto correttamente
       contenitore.innerText += testoDaScrivere.charAt(i);
       i++;
-      setTimeout(scrivi, 50);
+      setTimeout(scrivi, 60); // Scrittura leggermente più lenta per eleganza
     } else {
       isTyping = false;
       btn.style.opacity = "1";
@@ -347,8 +357,8 @@ function secret(){
   if(document.getElementById("secretpw").value==="amoreeterno"){
     document.getElementById("secretBox").innerHTML = `
       <div style="font-size:22px; line-height:1.6; color:white;">
-        Ho vissuto 17 anni cercando di essere razionale
-        secondo i criteri dell mia rigica matematica.<br>
+        Ho vissuto 17 anni cercando di essere razionale,
+        seguendo le mie rigide matematiche.<br>
         Quando ti guardo tutto cambia.<br>
         Con te non cerco ordine, cerco verità.<br>
         E in quella verità ci sei tu.
