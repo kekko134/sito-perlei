@@ -10,9 +10,17 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
   color: white;
-  background: #020b1a;
-  background: radial-gradient(circle at top, #0a2fff, #020b1a);
+  /* EFFETTO NEBULOSA ANIMATA */
+  background: linear-gradient(125deg, #020b1a, #0a2fff, #1a0a2f, #020b1a);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
   height: 100vh;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 #homeBtn {
@@ -48,9 +56,12 @@ button {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
+/* BAGLIORE MAGICO AI PULSANTI */
 button:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .section {
@@ -172,7 +183,7 @@ input {
 
   <div id="dediche" class="section">
     <div class="glass-box">
-        <div id="dedicaText" style="font-size:26px;"></div>
+        <div id="dedicaText" style="font-size:26px; min-height: 80px;"></div>
         <button onclick="nextDedica()" style="margin-top:30px;">Un altro pensiero...</button>
     </div>
   </div>
@@ -214,7 +225,7 @@ const frasi = [
   "la tua bellezza", "il tuo cuore", "il tuo amore che comprende", "i tuoi dolci", "la tua capacità di farmi battere il cuore",
   "come ogni posto con te diventi bellissimo", "come mangi", "quando reposta video sul nostro amore", "fare la doccia insieme", "quando mi scioglie l'anima",
   "quando mi pensa sempre", "quando mi include nei suoi piani", "quando fai l'offesa per gioco", "come mi capisci con un solo sguardo", "quando mi stringi forte a te",
-  "quando mi mandi video su tik tok", "quando mi aiuti a non fare scelte sbagliate", "come canti", "quando mi racconti la tua giornata", "quando ti appoggi sulla mia spalla",
+  "quando mi manda video su tik tok", "quando mi aiuti a non fare scelte sbagliate", "come canti", "quando mi racconti la tua giornata", "quando ti appoggi sulla mia spalla",
   "i tuoi occhi quando diventano lucidi", "il tuo modo di parlare", "bere insieme", "mangiare insieme", "quando mi scrivi che ti manco",
   "il tuo modo di rassicurarmi", "quando mi scrivi sul quaderno", "quando mi parli dei tuoi cibi preferiti", "quando mi parli dei tuoi sogni", "come mi sorride anche da arrabbiata",
   "il tuo odore nei miei vestiti", "quando mostri la tua intelligenza", "le nostre chiamate", "il destino che ci ha fatto incontrare", "quando immagini un futuro di noi",
@@ -258,7 +269,15 @@ function updateFrase(){
   }, 400);
 }
 
+/* ESPLOSIONE DI CUORI */
+function burstHearts() {
+  for(let i=0; i<15; i++) {
+    setTimeout(spawnHeart, i * 40);
+  }
+}
+
 function nextFrase(){
+  burstHearts(); // Trigger esplosione al click
   if(index < frasi.length - 1){
     index++;
     updateFrase();
@@ -298,9 +317,23 @@ const dediche=[
 "Oltre il tempo, io sarò qui."
 ];
 let d=0;
-function nextDedica(){
-  document.getElementById("dedicaText").innerText = dediche[d];
-  d = (d+1)%dediche.length;
+
+/* EFFETTO SCRITTURA PER DEDICHE */
+function nextDedica() {
+  const testoDaScrivere = dediche[d];
+  const contenitore = document.getElementById("dedicaText");
+  contenitore.innerText = ""; 
+  let i = 0;
+
+  function scrivi() {
+    if (i < testoDaScrivere.length) {
+      contenitore.innerText += testoDaScrivere.charAt(i);
+      i++;
+      setTimeout(scrivi, 50);
+    }
+  }
+  scrivi();
+  d = (d + 1) % dediche.length;
 }
 
 function secret(){
@@ -315,6 +348,7 @@ function secret(){
   }
 }
 
+/* SPAWN CUORI BIANCHI MIGLIORATO */
 function spawnHeart(){
   const h=document.createElement("div");
   h.classList.add("heart");
@@ -322,6 +356,8 @@ function spawnHeart(){
   h.style.left=Math.random()*100+"vw";
   h.style.fontSize=(10+Math.random()*20)+"px";
   h.style.animationDuration=(3+Math.random()*4)+"s";
+  h.style.opacity = Math.random();
+  h.style.filter = "blur(" + (Math.random() * 1.5) + "px)";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
 }
